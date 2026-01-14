@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 222.2 84% 4.9%;
+        --foreground: 210 40% 98%;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply antialiased;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        @apply bg-gray-100 dark:bg-gray-900;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-gradient-to-b from-blue-500 to-purple-600 rounded-full;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        @apply from-blue-600 to-purple-700;
+    }
+
+    /* Subtle decorative background layers */
+    body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background-image:
+            radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0.00) 40%),
+            radial-gradient(circle at 90% 80%, rgba(249, 115, 22, 0.06) 0%, rgba(249, 115, 22, 0.00) 35%);
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 1;
+        transition: opacity 300ms ease-in-out;
+    }
+
+    /* Dark mode variant */
+    html.dark body::before {
+        background-image:
+            radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0.00) 40%),
+            radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.06) 0%, rgba(14, 165, 233, 0.00) 35%);
+        opacity: 0.65;
+    }
+}
+
+@layer utilities {
+
+    /* Glassmorphism */
+    .glass {
+        @apply bg-white/10 dark:bg-gray-900/10 backdrop-blur-lg border border-white/20 dark:border-gray-700/20;
+    }
+
+    .glass-strong {
+        @apply bg-white/20 dark:bg-gray-900/20 backdrop-blur-xl border border-white/30 dark:border-gray-700/30;
+    }
+
+    /* 3D Transform utilities */
+    .transform-3d {
+        transform-style: preserve-3d;
+    }
+
+    .backface-hidden {
+        backface-visibility: hidden;
+    }
+
+    /* Custom cursor */
+    .custom-cursor {
+        cursor: none;
+    }
+
+    /* Text gradient */
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 dark:from-blue-400 dark:via-purple-400 dark:to-cyan-400;
+    }
+}
