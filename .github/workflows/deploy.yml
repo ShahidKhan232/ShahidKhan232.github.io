@@ -41,6 +41,20 @@ jobs:
         env:
           NEXT_TELEMETRY_DISABLED: 1
 
+      - name: Verify build output
+        run: |
+          echo "Checking if out directory exists..."
+          if [ -d "./out" ]; then
+            echo "✓ out directory exists"
+            echo "Contents:"
+            ls -la ./out
+          else
+            echo "✗ out directory does not exist!"
+            echo "Current directory contents:"
+            ls -la
+            exit 1
+          fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
