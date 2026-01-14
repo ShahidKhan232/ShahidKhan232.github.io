@@ -1,16 +1,13 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import Navigation from '@/components/Navigation';
 import ParticleBackground from '@/components/ParticleBackground';
 import CustomCursor from '@/components/CustomCursor';
 import ScrollProgress from '@/components/ScrollProgress';
-import FilterablePortfolio from '@/components/FilterablePortfolio';
+import PortfolioContent from '@/components/PortfolioContent';
 
 export default function PortfolioPage() {
-    const searchParams = useSearchParams();
-    const filter = searchParams.get('filter') as 'all' | 'projects' | 'certifications' | null;
-
     return (
         <div className="min-h-screen transition-colors duration-300">
             <CustomCursor />
@@ -18,7 +15,9 @@ export default function PortfolioPage() {
             <ParticleBackground />
             <Navigation />
             <main className="bg-white dark:bg-gray-900">
-                <FilterablePortfolio initialFilter={filter || 'all'} />
+                <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-slate-900"><div className="text-cyan-400 font-mono">Loading...</div></div>}>
+                    <PortfolioContent />
+                </Suspense>
             </main>
         </div>
     );
