@@ -20,7 +20,7 @@ export default function ProjectsOverview() {
                     <div className="text-center mb-16">
                         <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-slate-800/80 rounded-lg border border-cyan-500/30">
                             <Workflow className="w-5 h-5 text-cyan-400" />
-                            <span className="text-cyan-400 font-mono text-sm">$ ls -la ~/projects</span>
+                            <span className="text-cyan-400 font-mono text-sm">$ helm list --namespace=projects</span>
                         </div>
                         <h2 className="text-4xl md:text-5xl font-bold text-gray-100 mb-4">
                             Featured Projects
@@ -66,6 +66,19 @@ export default function ProjectsOverview() {
                                             {getProjectIcon()}
                                         </div>
                                     </div>
+
+                                    {/* Project Image */}
+                                    {project.image && (
+                                        <div className="relative h-48 overflow-hidden bg-slate-900/50">
+                                            <motion.img
+                                                whileHover={{ scale: 1.05 }}
+                                                src={project.image}
+                                                alt={project.title}
+                                                className="w-full h-full object-cover transition-transform duration-300"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-slate-800/80 to-transparent" />
+                                        </div>
+                                    )}
 
                                     <div className="p-6 flex-1 flex flex-col">
                                         <h3 className="text-xl font-bold text-gray-100 mb-3 flex items-start gap-2">

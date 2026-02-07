@@ -1,12 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { projects, certifications } from '@/lib/siteContent';
+import { projects } from '@/lib/siteContent';
 import Reveal from './Reveal';
 import { motion } from 'framer-motion';
 import { ExternalLink, Cloud, Server, Database, Container, GitBranch, Workflow, Shield, Zap, Award, Filter } from 'lucide-react';
 
-type FilterType = 'all' | 'projects' | 'certifications';
+type FilterType = 'all' | 'projects';
 
 interface FilterablePortfolioProps {
     initialFilter?: FilterType;
@@ -18,11 +18,9 @@ export default function FilterablePortfolio({ initialFilter = 'all' }: Filterabl
     const filters: { id: FilterType; label: string }[] = [
         { id: 'all', label: 'All' },
         { id: 'projects', label: 'Projects' },
-        { id: 'certifications', label: 'Certifications' },
     ];
 
     const showProjects = activeFilter === 'all' || activeFilter === 'projects';
-    const showCertifications = activeFilter === 'all' || activeFilter === 'certifications';
 
     return (
         <section className="py-20 bg-gradient-to-b from-slate-900 via-blue-950 to-slate-900 dark:from-gray-900 dark:via-blue-950 dark:to-gray-900 relative overflow-hidden min-h-screen">
@@ -41,7 +39,7 @@ export default function FilterablePortfolio({ initialFilter = 'all' }: Filterabl
                         </h1>
                         <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 mx-auto rounded-full" />
                         <p className="mt-4 text-lg text-gray-400 font-mono">
-                            <span className="text-cyan-400">&gt;</span> Explore my projects and certifications
+                            <span className="text-cyan-400">&gt;</span> Explore my projects
                         </p>
                     </div>
                 </Reveal>
@@ -60,8 +58,8 @@ export default function FilterablePortfolio({ initialFilter = 'all' }: Filterabl
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => setActiveFilter(filter.id)}
                                 className={`px-6 py-3 rounded-lg font-mono font-semibold transition-all duration-300 ${activeFilter === filter.id
-                                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/30 border border-cyan-400/50'
-                                        : 'bg-slate-800/50 text-gray-300 border border-cyan-500/20 hover:border-cyan-500/40 hover:text-cyan-400'
+                                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/30 border border-cyan-400/50'
+                                    : 'bg-slate-800/50 text-gray-300 border border-cyan-500/20 hover:border-cyan-500/40 hover:text-cyan-400'
                                     }`}
                             >
                                 {filter.label}
@@ -116,6 +114,19 @@ export default function FilterablePortfolio({ initialFilter = 'all' }: Filterabl
                                                 </div>
                                             </div>
 
+                                            {/* Project Image */}
+                                            {project.image && (
+                                                <div className="relative h-48 overflow-hidden bg-slate-900/50">
+                                                    <motion.img
+                                                        whileHover={{ scale: 1.05 }}
+                                                        src={project.image}
+                                                        alt={project.title}
+                                                        className="w-full h-full object-cover transition-transform duration-300"
+                                                    />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-800/80 to-transparent" />
+                                                </div>
+                                            )}
+
                                             <div className="p-6 flex-1 flex flex-col">
                                                 <h3 className="text-xl font-bold text-gray-100 mb-3 flex items-start gap-2">
                                                     <span className="text-cyan-400 font-mono text-sm mt-1">&gt;</span>
@@ -168,53 +179,7 @@ export default function FilterablePortfolio({ initialFilter = 'all' }: Filterabl
                     </div>
                 )}
 
-                {/* Certifications Section */}
-                {showCertifications && (
-                    <div>
-                        <Reveal>
-                            <div className="flex items-center gap-3 mb-8">
-                                <Shield className="w-8 h-8 text-cyan-400" />
-                                <h2 className="text-3xl md:text-4xl font-bold text-gray-100 font-mono">
-                                    <span className="text-cyan-400">&gt;</span> Certifications
-                                </h2>
-                            </div>
-                        </Reveal>
 
-                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {certifications.map((cert, index) => (
-                                <Reveal key={index} delay={index * 0.1}>
-                                    <motion.a
-                                        href={cert.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        whileHover={{ scale: 1.05, rotateY: 5 }}
-                                        className="block bg-slate-800/50 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-cyan-500/20 hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 group transform-3d"
-                                    >
-                                        <div className="flex items-start justify-between mb-4">
-                                            <div className="text-4xl">{cert.icon}</div>
-                                            <div className="p-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg group-hover:bg-cyan-500/20 group-hover:border-cyan-400/50 transition-all">
-                                                <Award className="w-5 h-5 text-cyan-400" />
-                                            </div>
-                                        </div>
-
-                                        <h3 className="text-lg font-bold text-gray-100 mb-2 group-hover:text-cyan-400 transition-colors">
-                                            {cert.name}
-                                        </h3>
-
-                                        <p className="text-sm text-gray-400 mb-4 font-mono">
-                                            {cert.issuer}
-                                        </p>
-
-                                        <div className="flex items-center gap-2 text-cyan-400 text-sm font-medium font-mono">
-                                            <span>View Certificate</span>
-                                            <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                        </div>
-                                    </motion.a>
-                                </Reveal>
-                            ))}
-                        </div>
-                    </div>
-                )}
             </div>
 
             {/* Floating infrastructure icons */}

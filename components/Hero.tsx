@@ -27,7 +27,7 @@ export default function Hero() {
                     <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-slate-800/80 dark:bg-slate-900/80 rounded-lg border border-cyan-500/30 backdrop-blur-sm">
                         <Terminal className="w-4 h-4 text-cyan-400" />
                         <p className="text-cyan-400 font-mono text-sm">
-                            $ {hero.greeting}
+                            $ kubectl get pods --namespace=portfolio
                         </p>
                         <span className="w-2 h-4 bg-cyan-400 animate-pulse" />
                     </div>

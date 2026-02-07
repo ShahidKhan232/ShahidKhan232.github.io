@@ -3,6 +3,7 @@ import { Code2, Wrench, Cloud, Monitor, Mail, Phone, MapPin } from 'lucide-react
 export const navItems = [
     { name: 'Home', href: '/#home' },
     { name: 'About', href: '/#about' },
+    { name: 'Skills', href: '/#skills' },
     { name: 'Experience', href: '/#experience' },
     { name: 'Portfolio', href: '/portfolio' },
     { name: 'Contact', href: '/#contact' },
@@ -12,7 +13,7 @@ export const hero = {
     greeting: 'Welcome to my portfolio',
     name: 'Shahid Shahadat Khan',
     title: 'DevOps Engineer',
-    tagline: 'Building scalable, automated cloud solutions with AWS and DevOps tools',
+    tagline: 'Results-driven DevOps Engineer with expertise in CI/CD automation, infrastructure as code, and cloud technologies. Skilled in implementing secure, scalable solutions using AWS, Kubernetes, and container technologies.',
     socials: {
         github: 'https://github.com/ShahidKhan232',
         linkedin: 'https://linkedin.com/in/shahid-khan-985919317',
@@ -24,115 +25,137 @@ export const hero = {
 
 export const projects = [
     {
-        title: 'AlertOps – Automated Incident Response System',
+        title: 'Multi-Environment Infrastructure as Code',
         description:
-            'Built a comprehensive Docker-based monitoring stack with real-time alerting capabilities for production environments.',
+            'Designed reusable Terraform modules for dev, staging, and prod environments with automated Ansible configuration management.',
         highlights: [
-            'Implemented monitoring stack using Prometheus, Grafana, and Alertmanager',
-            'Integrated Flask application and Windows Exporter for comprehensive metrics collection',
-            'Configured Twilio SMS integration for real-time incident notifications',
-            'Containerized entire stack for easy deployment and scalability',
+            'Designed reusable Terraform modules for dev, staging, and prod, improving infrastructure consistency by 70%',
+            'Implemented remote Terraform state using S3 and DynamoDB, eliminating state conflicts and manual locking',
+            'Automated Nginx installation and configuration with Ansible, reducing server setup time by 80%',
         ],
-        technologies: ['Docker', 'Prometheus', 'Grafana', 'Alertmanager', 'Flask', 'Twilio'],
-        github: 'https://github.com/ShahidKhan232/AlertOps-Automated-Incident-Response-System',
+        technologies: ['Terraform', 'Ansible', 'AWS S3', 'DynamoDB', 'Nginx'],
+        github: 'https://github.com/ShahidKhan232/Multi-Env-IaC',
+        image: '/Images/Multi-env-project.gif',
+        color: 'from-purple-500 via-indigo-500 to-blue-500',
+    },
+    {
+        title: 'Wisecow Application Deployment on AWS EKS',
+        description:
+            'Deployed containerized application on AWS EKS with Terraform-provisioned infrastructure supporting 99.9% uptime.',
+        highlights: [
+            'Deployed containerized application on AWS EKS with Terraform-provisioned infrastructure supporting 99.9% uptime',
+            'Configured NGINX Ingress with TLS using cert-manager and Let\'s Encrypt, securing 100% of external traffic',
+            'Implemented GitHub Actions CI/CD pipeline, reducing deployment time by 65%',
+            'Enabled Horizontal Pod Autoscaling, handling traffic spikes of up to 3x without service degradation',
+        ],
+        technologies: ['AWS EKS', 'Terraform', 'Kubernetes', 'NGINX Ingress', 'GitHub Actions', 'cert-manager'],
+        github: 'https://github.com/ShahidKhan232/Containerisation-and-Deployment-of-Wisecow-Application-on-Kubernetes-',
+        image: '/Images/wisecow-deployment.png',
+        color: 'from-blue-500 via-cyan-500 to-teal-500',
+    },
+    {
+        title: 'Three-Tier High Availability Architecture on AWS',
+        description:
+            'Designed highly available three-tier architecture using ALB, Auto Scaling Groups, and Multi-AZ deployment.',
+        highlights: [
+            'Designed highly available three-tier architecture using ALB, Auto Scaling Groups, and Multi-AZ deployment',
+            'Configured RDS backend with private subnets and security groups, improving fault tolerance by 50%',
+            'Integrated CloudFront, ACM, and Route53, reducing page load latency by 40%',
+        ],
+        technologies: ['AWS ALB', 'Auto Scaling', 'RDS', 'CloudFront', 'Route53', 'ACM', 'VPC'],
+        github: 'https://github.com/ShahidKhan232/Cloud-Projects/tree/main/Three-Tier-Architecture',
+        image: '/Images/three-tier-project.png',
         color: 'from-orange-500 via-red-500 to-pink-500',
     },
     {
-        title: 'Ecommerce Website Deployment – Cloud Infrastructure',
+        title: 'Serverless Image Processing & Cost Optimization',
         description:
-            'Deployed a production-ready full-stack e-commerce application on AWS EKS with industry-standard DevOps practices.',
+            'Built event-driven serverless workflows using Lambda, S3 triggers, and SNS with near-zero idle cost.',
         highlights: [
-            'Deployed application on AWS EKS (Elastic Kubernetes Service)',
-            'Implemented MongoDB database with high availability',
-            'Configured Nginx reverse proxy for load balancing',
-            'Applied DevOps best practices for performance optimization and security',
+            'Built event-driven serverless workflows using Lambda, S3 triggers, and SNS with near-zero idle cost',
+            'Automated image processing and reporting pipelines, processing 100+ events/day',
+            'Applied IAM least-privilege policies, reducing security exposure by 45%',
         ],
-        technologies: ['AWS EKS', 'Docker', 'Kubernetes', 'MongoDB', 'Nginx'],
-        github: 'https://github.com/ShahidKhan232/Devops-Project',
-        color: 'from-blue-500 via-purple-500 to-cyan-500',
+        technologies: ['AWS Lambda', 'S3', 'SNS', 'IAM', 'Python'],
+        github: 'https://github.com/ShahidKhan232/Cloud-Projects/tree/main/AWS-Serverless',
+        image: '/Images/Serverless.gif',
+        color: 'from-green-500 via-emerald-500 to-teal-500',
     },
     {
-        title: 'Full Stack CI/CD Pipeline – Microservices Deployment',
+        title: 'Automated Monitoring & Alerting System',
         description:
-            'Automated complete deployment pipeline for a microservices architecture with zero-downtime deployments.',
+            'Implemented Prometheus and Grafana dashboards monitoring 20+ system metrics in real time with proactive alerting.',
         highlights: [
-            'Automated CI/CD pipeline using Jenkins with GitHub webhooks',
-            'Deployed React frontend, Spring Boot backend with dual database support',
-            'Implemented Docker Compose for multi-container orchestration',
-            'Configured automated SSH key management and deployment to AWS EC2',
+            'Implemented Prometheus and Grafana dashboards monitoring 20+ system metrics in real time',
+            'Configured alerting rules enabling proactive incident detection and reducing response time by 70%',
         ],
-        technologies: ['Jenkins', 'Docker', 'AWS EC2', 'React', 'Spring Boot', 'PostgreSQL', 'MongoDB'],
-        github: 'https://github.com/ShahidKhan232/Full-stack-cicd-pipeline',
-        color: 'from-green-500 via-teal-500 to-cyan-500',
+        technologies: ['Prometheus', 'Grafana', 'Alertmanager', 'Docker'],
+        github: 'https://github.com/ShahidKhan232/AlertOps-Automated-Incident-Response-System',
+        image: '/Images/alertops.png',
+        color: 'from-yellow-500 via-orange-500 to-red-500',
     },
 ];
 
-export const certifications = [
-    {
-        name: 'Introduction to Linux',
-        issuer: 'The Linux Foundation',
-        link: 'https://www.credly.com/badges/ed7c4db1-8e23-4c2f-a95a-12bcf450ae88/linked_in_profile',
-        icon: '🐧',
-    },
-    {
-        name: 'Git',
-        issuer: 'KodeKloud',
-        link: 'https://learn.kodekloud.com/certificate/8d917505-3220-4eee-aab8-ab119dde5ebb',
-        icon: '📦',
-    },
-    {
-        name: 'Network Basics',
-        issuer: 'Cisco',
-        link: 'https://www.credly.com/badges/67412521-733f-4373-acbf-77995b51e55a/linked_in_profile',
-        icon: '🌐',
-    },
-    {
-        name: 'Docker',
-        issuer: 'KodeKloud',
-        link: 'https://learn.kodekloud.com/certificate/27e2b303-aa12-4718-9f28-230911eada41',
-        icon: '🐳',
-    },
-    {
-        name: 'Google Cloud Computing Foundations',
-        issuer: 'Google',
-        link: 'https://www.credly.com/badges/5be6f7da-3df6-44e7-aa6b-b5adea711c99/linked_in_profile',
-        icon: '☁️',
-    },
-    {
-        name: 'Jenkins',
-        issuer: 'KodeKloud',
-        link: 'https://learn.kodekloud.com/certificate/6a6fb192-2068-46fc-a148-4cf576d275d9',
-        icon: '⚙️',
-    },
-];
 
 export const about = {
-    bio: "I'm a DevOps Engineer passionate about automation, cloud infrastructure, and CI/CD pipelines. Currently pursuing a BE in Computer Engineering at Gharda Institute of Technology, I aim to design secure, scalable, and efficient deployment architectures on AWS.",
+    bio: "Results-driven DevOps Engineer with expertise in CI/CD automation, infrastructure as code, and cloud technologies. Skilled in implementing secure, scalable solutions using AWS, Kubernetes, and container technologies. Adept at bridging development and operations teams to deliver high-performance applications with 99.9% uptime and 40% faster deployment cycles.",
     education: {
-        degree: 'BE in Computer Engineering',
-        school: 'Gharda Institute of Technology',
-        status: 'Current Student',
+        degree: 'Bachelor of Engineering in Computer Engineering',
+        school: 'Gharda Institute of Technology, Khed, Maharashtra',
+        status: 'Aug 2022 – May 2026',
     },
     skills: [
         {
-            category: 'Programming',
-            icon: Code2,
-            items: ['Python', 'SQL', 'Shell Scripting'],
-        },
-        {
-            category: 'DevOps Tools',
-            icon: Wrench,
-            items: ['AWS', 'Docker', 'Kubernetes', 'Terraform', 'Jenkins', 'GitHub Actions', 'Ansible', 'JFrog'],
-        },
-        {
-            category: 'Cloud Services',
+            category: 'Infrastructure & Cloud',
             icon: Cloud,
-            items: ['EC2', 'S3', 'RDS', 'IAM', 'VPC', 'ECS', 'ECR'],
+            items: [
+                { name: 'AWS', iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/2560px-Amazon_Web_Services_Logo.svg.png' },
+                { name: 'Terraform', iconUrl: 'https://www.vectorlogo.zone/logos/terraformio/terraformio-icon.svg' },
+                { name: 'Ansible', iconUrl: 'https://www.vectorlogo.zone/logos/ansible/ansible-icon.svg' },
+            ],
         },
         {
-            category: 'Monitoring',
+            category: 'Containerization & Orchestration',
+            icon: Code2,
+            items: [
+                { name: 'Docker', iconUrl: 'https://www.vectorlogo.zone/logos/docker/docker-icon.svg' },
+                { name: 'Kubernetes', iconUrl: 'https://www.vectorlogo.zone/logos/kubernetes/kubernetes-icon.svg' },
+                { name: 'ArgoCD', iconUrl: 'https://avatars.githubusercontent.com/u/30269780?s=200&v=4' },
+            ],
+        },
+        {
+            category: 'CI/CD & Automation',
+            icon: Wrench,
+            items: [
+                { name: 'Jenkins', iconUrl: 'https://www.jenkins.io/images/logos/jenkins/jenkins.svg' },
+                { name: 'GitHub Actions', iconUrl: 'https://avatars.githubusercontent.com/u/44036562?s=200&v=4' },
+                { name: 'GitLab', iconUrl: 'https://www.vectorlogo.zone/logos/gitlab/gitlab-icon.svg' },
+                { name: 'Shell Scripting', iconUrl: 'https://upload.vectorlogo.zone/logos/gnu_bash/images/66582b8e-a291-4a1b-b89c-76628277a33b.svg' },
+            ],
+        },
+
+        {
+            category: 'Monitoring & Observability',
             icon: Monitor,
-            items: ['Prometheus', 'Grafana', 'Alertmanager'],
+            items: [
+                { name: 'Prometheus', iconUrl: 'https://www.vectorlogo.zone/logos/prometheusio/prometheusio-icon.svg' },
+                { name: 'Grafana', iconUrl: 'https://www.vectorlogo.zone/logos/grafana/grafana-icon.svg' },
+            ],
+        },
+        {
+            category: 'Programming Languages',
+            icon: Code2,
+            items: [
+                { name: 'Python', iconUrl: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg' },
+                { name: 'Bash', iconUrl: 'https://upload.vectorlogo.zone/logos/gnu_bash/images/66582b8e-a291-4a1b-b89c-76628277a33b.svg' },
+            ],
+        },
+        {
+            category: 'Tools & OS',
+            icon: Wrench,
+            items: [
+                { name: 'Linux', iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png' },
+            ],
         },
     ],
 };
@@ -173,20 +196,22 @@ export const experience = [
         role: 'AWS Intern',
         company: 'Therayu',
         start: 'May 2025',
-        end: 'October 2025',
+        end: 'Oct 2025',
         location: 'Remote',
         bullets: [
-            'Designed and implemented AWS cloud architectures including EC2, S3, RDS, IAM, VPC, ECS, and ECR',
-            'Supported DevOps initiatives including CI/CD pipelines, Dockerization, and infrastructure automation using Terraform and Jenkins',
-            'Collaborated with cross-functional teams to optimize deployment workflows and ensure scalable, secure infrastructure',
+            'Provisioned AWS infrastructure (EC2, S3, VPC, IAM, EKS) supporting 3+ application environments',
+            'Built CI/CD pipelines using Jenkins and GitHub Actions, reducing manual deployment effort by 60%',
+            'Containerized and deployed applications using Docker and Amazon ECS, improving resource utilization by 35%',
+            'Managed infrastructure provisioning with Terraform, reducing environment setup time from hours to 15 minutes',
+            'Implemented IAM least-privilege access and network security controls, lowering misconfiguration risks by 40%',
         ],
-        techTags: ['AWS', 'Docker', 'Terraform', 'Jenkins', 'CI/CD'],
+        techTags: ['AWS', 'EC2', 'EKS', 'S3', 'IAM', 'Docker', 'ECS', 'Terraform', 'Jenkins', 'GitHub Actions'],
     },
 ];
 
 export const stats = [
-    { label: 'Projects Completed', value: 3, suffix: '+' },
-    { label: 'Technologies Mastered', value: 15, suffix: '+' },
-    { label: 'Certifications Earned', value: 6, suffix: '' },
-    { label: 'Years Experience', value: 1, suffix: '+' },
+    { label: 'Projects Completed', value: 5, suffix: '+' },
+    { label: 'Technologies Mastered', value: 20, suffix: '+' },
+    { label: 'Deployment Time Reduction', value: 65, suffix: '%' },
+    { label: 'Uptime Achievement', value: 99.9, suffix: '%' },
 ];
