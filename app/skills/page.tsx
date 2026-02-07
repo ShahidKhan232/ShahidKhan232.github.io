@@ -1,11 +1,11 @@
-import Hero from '@/components/Hero';
+import Skills from '@/components/Skills';
 import Navigation from '@/components/Navigation';
 import ParticleBackground from '@/components/ParticleBackground';
 import CustomCursor from '@/components/CustomCursor';
 import ScrollProgress from '@/components/ScrollProgress';
 import CloudBackground from '@/components/CloudBackground';
 
-export default function Home() {
+export default function SkillsPage() {
     return (
         <div className="min-h-screen transition-colors duration-300">
             <CustomCursor />
@@ -13,8 +13,8 @@ export default function Home() {
             <CloudBackground />
             <ParticleBackground />
             <Navigation />
-            <main className="bg-white dark:bg-gray-900">
-                <Hero />
+            <main className="bg-white dark:bg-gray-900 pt-16">
+                <Skills />
             </main>
         </div>
     );

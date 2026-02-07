@@ -4,6 +4,7 @@ import { Github, Linkedin, Mail, Download, ChevronDown, Cloud, Server, Database,
 import { hero } from '@/lib/siteContent';
 import Reveal from './Reveal';
 import TypingAnimation from './TypingAnimation';
+import Typewriter from './Typewriter';
 
 export default function Hero() {
     const scrollToAbout = () => {
@@ -41,11 +42,16 @@ export default function Hero() {
                         />
                     </h1>
 
-                    {/* Title with cloud icon */}
+                    {/* Title with cloud icon and typewriter */}
                     <div className="flex items-center justify-center gap-3 mb-6">
                         <CloudCog className="w-8 h-8 text-cyan-400" />
                         <h2 className="text-2xl md:text-4xl font-semibold text-gray-100 dark:text-gray-200">
-                            {hero.title}
+                            <Typewriter
+                                words={['DevOps Engineer', 'Cloud Engineer']}
+                                typingSpeed={100}
+                                deletingSpeed={50}
+                                pauseDuration={2000}
+                            />
                         </h2>
                         <Server className="w-8 h-8 text-blue-400" />
                     </div>

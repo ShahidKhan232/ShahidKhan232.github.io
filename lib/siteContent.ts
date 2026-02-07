@@ -1,19 +1,19 @@
 import { Code2, Wrench, Cloud, Monitor, Mail, Phone, MapPin } from 'lucide-react';
 
 export const navItems = [
-    { name: 'Home', href: '/#home' },
-    { name: 'About', href: '/#about' },
-    { name: 'Skills', href: '/#skills' },
-    { name: 'Experience', href: '/#experience' },
-    { name: 'Portfolio', href: '/portfolio' },
-    { name: 'Contact', href: '/#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Skills', href: '/skills' },
+    { name: 'Experience', href: '/experience' },
+    { name: 'Projects', href: '/portfolio' },
+    { name: 'Contact', href: '/contact' },
 ];
 
 export const hero = {
     greeting: 'Welcome to my portfolio',
     name: 'Shahid Shahadat Khan',
     title: 'DevOps Engineer',
-    tagline: 'Results-driven DevOps Engineer with expertise in CI/CD automation, infrastructure as code, and cloud technologies. Skilled in implementing secure, scalable solutions using AWS, Kubernetes, and container technologies.',
+    tagline: 'I turn infrastructure chaos into calm, automated systems.',
     socials: {
         github: 'https://github.com/ShahidKhan232',
         linkedin: 'https://linkedin.com/in/shahid-khan-985919317',
@@ -28,11 +28,6 @@ export const projects = [
         title: 'Multi-Environment Infrastructure as Code',
         description:
             'Designed reusable Terraform modules for dev, staging, and prod environments with automated Ansible configuration management.',
-        highlights: [
-            'Designed reusable Terraform modules for dev, staging, and prod, improving infrastructure consistency by 70%',
-            'Implemented remote Terraform state using S3 and DynamoDB, eliminating state conflicts and manual locking',
-            'Automated Nginx installation and configuration with Ansible, reducing server setup time by 80%',
-        ],
         technologies: ['Terraform', 'Ansible', 'AWS S3', 'DynamoDB', 'Nginx'],
         github: 'https://github.com/ShahidKhan232/Multi-Env-IaC',
         image: '/Images/Multi-env-project.gif',
@@ -42,12 +37,6 @@ export const projects = [
         title: 'Wisecow Application Deployment on AWS EKS',
         description:
             'Deployed containerized application on AWS EKS with Terraform-provisioned infrastructure supporting 99.9% uptime.',
-        highlights: [
-            'Deployed containerized application on AWS EKS with Terraform-provisioned infrastructure supporting 99.9% uptime',
-            'Configured NGINX Ingress with TLS using cert-manager and Let\'s Encrypt, securing 100% of external traffic',
-            'Implemented GitHub Actions CI/CD pipeline, reducing deployment time by 65%',
-            'Enabled Horizontal Pod Autoscaling, handling traffic spikes of up to 3x without service degradation',
-        ],
         technologies: ['AWS EKS', 'Terraform', 'Kubernetes', 'NGINX Ingress', 'GitHub Actions', 'cert-manager'],
         github: 'https://github.com/ShahidKhan232/Containerisation-and-Deployment-of-Wisecow-Application-on-Kubernetes-',
         image: '/Images/wisecow-deployment.png',
@@ -57,11 +46,6 @@ export const projects = [
         title: 'Three-Tier High Availability Architecture on AWS',
         description:
             'Designed highly available three-tier architecture using ALB, Auto Scaling Groups, and Multi-AZ deployment.',
-        highlights: [
-            'Designed highly available three-tier architecture using ALB, Auto Scaling Groups, and Multi-AZ deployment',
-            'Configured RDS backend with private subnets and security groups, improving fault tolerance by 50%',
-            'Integrated CloudFront, ACM, and Route53, reducing page load latency by 40%',
-        ],
         technologies: ['AWS ALB', 'Auto Scaling', 'RDS', 'CloudFront', 'Route53', 'ACM', 'VPC'],
         github: 'https://github.com/ShahidKhan232/Cloud-Projects/tree/main/Three-Tier-Architecture',
         image: '/Images/three-tier-project.png',
@@ -71,11 +55,6 @@ export const projects = [
         title: 'Serverless Image Processing & Cost Optimization',
         description:
             'Built event-driven serverless workflows using Lambda, S3 triggers, and SNS with near-zero idle cost.',
-        highlights: [
-            'Built event-driven serverless workflows using Lambda, S3 triggers, and SNS with near-zero idle cost',
-            'Automated image processing and reporting pipelines, processing 100+ events/day',
-            'Applied IAM least-privilege policies, reducing security exposure by 45%',
-        ],
         technologies: ['AWS Lambda', 'S3', 'SNS', 'IAM', 'Python'],
         github: 'https://github.com/ShahidKhan232/Cloud-Projects/tree/main/AWS-Serverless',
         image: '/Images/Serverless.gif',
@@ -85,10 +64,6 @@ export const projects = [
         title: 'Automated Monitoring & Alerting System',
         description:
             'Implemented Prometheus and Grafana dashboards monitoring 20+ system metrics in real time with proactive alerting.',
-        highlights: [
-            'Implemented Prometheus and Grafana dashboards monitoring 20+ system metrics in real time',
-            'Configured alerting rules enabling proactive incident detection and reducing response time by 70%',
-        ],
         technologies: ['Prometheus', 'Grafana', 'Alertmanager', 'Docker'],
         github: 'https://github.com/ShahidKhan232/AlertOps-Automated-Incident-Response-System',
         image: '/Images/alertops.png',
@@ -98,7 +73,7 @@ export const projects = [
 
 
 export const about = {
-    bio: "Results-driven DevOps Engineer with expertise in CI/CD automation, infrastructure as code, and cloud technologies. Skilled in implementing secure, scalable solutions using AWS, Kubernetes, and container technologies. Adept at bridging development and operations teams to deliver high-performance applications with 99.9% uptime and 40% faster deployment cycles.",
+    bio: "I design and operate cloud-native systems that scale reliably and ship fast. From infrastructure as code to Kubernetes deployments and CI/CD automation, I focus on building systems that are secure, observable, and easy to operate. I care about clean automation, ownership, and shipping resilient products.",
     education: {
         degree: 'Bachelor of Engineering in Computer Engineering',
         school: 'Gharda Institute of Technology, Khed, Maharashtra',

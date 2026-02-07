@@ -133,18 +133,9 @@ export default function FilterablePortfolio({ initialFilter = 'all' }: Filterabl
                                                     <span>{project.title}</span>
                                                 </h3>
 
-                                                <p className="text-gray-400 mb-4 text-sm">
+                                                <p className="text-gray-400 mb-6 text-sm">
                                                     {project.description}
                                                 </p>
-
-                                                <div className="space-y-2 mb-6 flex-1">
-                                                    {project.highlights.map((highlight, idx) => (
-                                                        <div key={idx} className="flex items-start gap-2">
-                                                            <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full mt-2 flex-shrink-0" />
-                                                            <p className="text-sm text-gray-300">{highlight}</p>
-                                                        </div>
-                                                    ))}
-                                                </div>
 
                                                 <div className="flex flex-wrap gap-2 mb-6">
                                                     {project.technologies.map((tech, idx) => (
