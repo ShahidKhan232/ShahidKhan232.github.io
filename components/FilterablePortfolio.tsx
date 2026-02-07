@@ -35,7 +35,7 @@ export default function FilterablePortfolio({ initialFilter = 'all' }: Filterabl
                             <span className="text-cyan-400 font-mono text-sm">$ portfolio --list-all</span>
                         </div>
                         <h1 className="text-4xl md:text-6xl font-bold text-gray-100 mb-4">
-                            My Portfolio
+                            Projects
                         </h1>
                         <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 mx-auto rounded-full" />
                         <p className="mt-4 text-lg text-gray-400 font-mono">
@@ -127,17 +127,17 @@ export default function FilterablePortfolio({ initialFilter = 'all' }: Filterabl
                                                 </div>
                                             )}
 
-                                            <div className="p-6 flex-1 flex flex-col">
-                                                <h3 className="text-xl font-bold text-gray-100 mb-3 flex items-start gap-2">
+                                            <div className="p-5 flex-1 flex flex-col">
+                                                <h3 className="text-lg font-bold text-gray-100 mb-2 flex items-start gap-2">
                                                     <span className="text-cyan-400 font-mono text-sm mt-1">&gt;</span>
                                                     <span>{project.title}</span>
                                                 </h3>
 
-                                                <p className="text-gray-400 mb-6 text-sm">
+                                                <p className="text-gray-400 mb-4 text-sm leading-relaxed">
                                                     {project.description}
                                                 </p>
 
-                                                <div className="flex flex-wrap gap-2 mb-6">
+                                                <div className="flex flex-wrap gap-2 mb-4">
                                                     {project.technologies.map((tech, idx) => (
                                                         <span
                                                             key={idx}
