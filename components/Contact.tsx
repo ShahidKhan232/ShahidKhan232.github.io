@@ -52,33 +52,36 @@ export default function Contact() {
     };
 
     return (
-        <section id="contact" className="py-20 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 dark:from-gray-900 dark:via-gray-850 dark:to-gray-900 relative overflow-hidden">
-            {/* Grid background */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f1a_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f1a_1px,transparent_1px)] bg-[size:14px_24px] opacity-20" />
+        <section id="contact" className="min-h-screen flex items-center justify-center py-16 bg-gradient-to-b from-slate-950 via-indigo-950/50 to-slate-950 relative overflow-hidden">
+            {/* Modern grid background */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#6366f1_1px,transparent_1px),linear-gradient(to_bottom,#6366f1_1px,transparent_1px)] bg-[size:20px_20px] opacity-5" />
+            
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/10 via-transparent to-purple-950/10" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <Reveal>
-                    <div className="text-center mb-16">
-                        <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-slate-800/80 rounded-lg border border-cyan-500/30">
-                            <Send className="w-5 h-5 text-cyan-400" />
-                            <span className="text-cyan-400 font-mono text-sm">$ curl -X POST /api/contact</span>
+                    <div className="text-center mb-12">
+                        <div className="inline-flex items-center gap-3 mb-4 px-6 py-3 bg-slate-900/60 backdrop-blur-xl rounded-2xl border border-indigo-500/30 shadow-2xl shadow-indigo-500/10">
+                            <Send className="w-5 h-5 text-indigo-400" />
+                            <span className="text-indigo-400 font-mono text-sm font-medium">$ curl -X POST /api/contact</span>
                         </div>
                         <h2 className="text-4xl md:text-5xl font-bold text-gray-100 mb-4">
                             Get In Touch
                         </h2>
-                        <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 mx-auto rounded-full" />
+                        <div className="w-20 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mx-auto rounded-full" />
                     </div>
                 </Reveal>
 
-                <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-                    {/* Contact Info */}
-                    <div className="space-y-8">
+                <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                    {/* Modern Contact Info */}
+                    <div className="space-y-6">
                         <Reveal delay={0.2}>
-                            <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-cyan-500/20 hover:border-cyan-500/40 transition-all">
+                            <div className="bg-slate-900/40 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-indigo-500/20 hover:border-indigo-500/40 transition-all">
                                 <h3 className="text-2xl font-bold text-gray-100 mb-4">
                                     {contact.cta.heading}
                                 </h3>
-                                <p className="text-gray-300 mb-6">
+                                <p className="text-gray-300 mb-6 text-lg font-light leading-relaxed">
                                     {contact.cta.body}
                                 </p>
                                 <motion.a
@@ -88,7 +91,7 @@ export default function Contact() {
                                     {...(contact.cta.resumeDriveLink
                                         ? { target: '_blank', rel: 'noopener noreferrer' }
                                         : { download: true })}
-                                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-colors font-semibold shadow-lg shadow-cyan-500/30"
+                                    className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all font-semibold shadow-xl shadow-indigo-500/30 text-lg"
                                 >
                                     Download Resume
                                 </motion.a>
@@ -103,13 +106,13 @@ export default function Contact() {
                                         <motion.a
                                             href={info.href}
                                             whileHover={{ x: 8 }}
-                                            className="flex items-center gap-4 p-4 bg-slate-800/50 rounded-xl shadow-md hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 border border-cyan-500/20 hover:border-cyan-500/40"
+                                            className="flex items-center gap-4 p-4 bg-slate-900/40 backdrop-blur-xl rounded-xl shadow-lg hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-500 border border-indigo-500/20 hover:border-indigo-500/40"
                                         >
-                                            <div className="p-3 bg-cyan-500/20 rounded-lg border border-cyan-500/30">
-                                                <Icon className="w-6 h-6 text-cyan-400" />
+                                            <div className="p-3 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-xl border border-indigo-500/30 backdrop-blur-sm">
+                                                <Icon className="w-6 h-6 text-indigo-400" />
                                             </div>
                                             <div>
-                                                <p className="text-sm text-gray-400 font-mono">{info.label}</p>
+                                                <p className="text-sm text-gray-400 font-mono mb-1">{info.label}</p>
                                                 <p className="font-semibold text-gray-100">{info.value}</p>
                                             </div>
                                         </motion.a>
@@ -119,7 +122,7 @@ export default function Contact() {
                         </div>
                     </div>
 
-                    {/* Contact Form */}
+                    {/* Modern Contact Form */}
                     <Reveal delay={0.4}>
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div>
@@ -132,7 +135,7 @@ export default function Contact() {
                                     required
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                    className="w-full px-4 py-3 bg-slate-800/50 border border-cyan-500/30 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all outline-none text-gray-100 placeholder-gray-500 font-mono"
+                                    className="w-full px-4 py-3 bg-slate-900/60 backdrop-blur-xl border border-indigo-500/30 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none text-gray-100 placeholder-gray-500 font-mono"
                                     placeholder="Your name"
                                 />
                             </div>
@@ -147,7 +150,7 @@ export default function Contact() {
                                     required
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className="w-full px-4 py-3 bg-slate-800/50 border border-cyan-500/30 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all outline-none text-gray-100 placeholder-gray-500 font-mono"
+                                    className="w-full px-4 py-3 bg-slate-900/60 backdrop-blur-xl border border-indigo-500/30 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none text-gray-100 placeholder-gray-500 font-mono"
                                     placeholder="your.email@example.com"
                                 />
                             </div>
@@ -162,7 +165,7 @@ export default function Contact() {
                                     rows={5}
                                     value={formData.message}
                                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                    className="w-full px-4 py-3 bg-slate-800/50 border border-cyan-500/30 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all outline-none resize-none text-gray-100 placeholder-gray-500 font-mono"
+                                    className="w-full px-4 py-3 bg-slate-900/60 backdrop-blur-xl border border-indigo-500/30 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none resize-none text-gray-100 placeholder-gray-500 font-mono"
                                     placeholder="Your message..."
                                 />
                             </div>
@@ -172,7 +175,7 @@ export default function Contact() {
                                 disabled={status === 'loading'}
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-colors font-semibold flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-cyan-500/30 font-mono"
+                                className="w-full px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all font-semibold flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl shadow-indigo-500/30 font-mono"
                             >
                                 {status === 'loading' ? (
                                     <>
@@ -194,17 +197,17 @@ export default function Contact() {
                     </Reveal>
                 </div>
 
-                {/* Footer */}
+                {/* Modern Footer */}
                 <Reveal delay={0.6}>
-                    <div className="mt-20 text-center text-gray-400 font-mono">
+                    <div className="mt-16 text-center text-gray-400 font-mono">
                         <p>{contact.footerText}</p>
                     </div>
                 </Reveal>
             </div>
 
-            {/* Background decorative elements */}
-            <div className="absolute top-1/4 left-10 w-80 h-80 bg-gradient-to-r from-blue-200 to-purple-200 dark:from-blue-900/10 dark:to-purple-900/10 rounded-full filter blur-3xl opacity-30 pointer-events-none" />
-            <div className="absolute bottom-1/4 right-10 w-80 h-80 bg-gradient-to-r from-cyan-200 to-pink-200 dark:from-cyan-900/10 dark:to-pink-900/10 rounded-full filter blur-3xl opacity-30 pointer-events-none" />
+            {/* Modern background decorative elements */}
+            <div className="absolute top-1/4 left-20 w-96 h-96 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-full filter blur-3xl opacity-40 pointer-events-none" />
+            <div className="absolute bottom-1/4 right-20 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full filter blur-3xl opacity-40 pointer-events-none" />
         </section>
     );
 }

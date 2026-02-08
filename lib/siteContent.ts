@@ -1,12 +1,12 @@
 import { Code2, Wrench, Cloud, Monitor, Mail, Phone, MapPin } from 'lucide-react';
 
 export const navItems = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Skills', href: '/skills' },
-    { name: 'Experience', href: '/experience' },
-    { name: 'Projects', href: '/portfolio' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Home', href: '#home' },
+    { name: 'About', href: '#about' },
+    { name: 'Skills', href: '#skills' },
+    { name: 'Experience', href: '#experience' },
+    { name: 'Projects', href: '#portfolio' },
+    { name: 'Contact', href: '#contact' },
 ];
 
 export const hero = {
@@ -20,7 +20,7 @@ export const hero = {
         email: 'mailto:shahidkhan.95173@gmail.com',
     },
     resumePath: '/resume.pdf',
-    resumeDriveLink: 'https://drive.google.com/file/d/1vNl4eprM9F6LfbUGiYfRwIh464Zc5pSr/view?usp=sharing',
+    resumeDriveLink: 'https://drive.google.com/file/d/10bihR728rXyvaNHt68AFia9EFhATAf5G/view?usp=sharing',
 };
 
 export const projects = [
@@ -84,6 +84,7 @@ export const about = {
             category: 'Infrastructure & Cloud',
             icon: Cloud,
             items: [
+                { name: 'Linux', iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png' },
                 { name: 'AWS', iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/2560px-Amazon_Web_Services_Logo.svg.png' },
                 { name: 'Terraform', iconUrl: 'https://www.vectorlogo.zone/logos/terraformio/terraformio-icon.svg' },
                 { name: 'Ansible', iconUrl: 'https://www.vectorlogo.zone/logos/ansible/ansible-icon.svg' },
@@ -95,6 +96,7 @@ export const about = {
             items: [
                 { name: 'Docker', iconUrl: 'https://www.vectorlogo.zone/logos/docker/docker-icon.svg' },
                 { name: 'Kubernetes', iconUrl: 'https://www.vectorlogo.zone/logos/kubernetes/kubernetes-icon.svg' },
+                { name: 'Helm', iconUrl: 'https://www.vectorlogo.zone/logos/helmsh/helmsh-icon.svg' },
                 { name: 'ArgoCD', iconUrl: 'https://avatars.githubusercontent.com/u/30269780?s=200&v=4' },
             ],
         },
@@ -103,12 +105,10 @@ export const about = {
             icon: Wrench,
             items: [
                 { name: 'Jenkins', iconUrl: 'https://www.jenkins.io/images/logos/jenkins/jenkins.svg' },
+                { name: 'Git', iconUrl: 'https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png' },
                 { name: 'GitHub Actions', iconUrl: 'https://avatars.githubusercontent.com/u/44036562?s=200&v=4' },
-                { name: 'GitLab', iconUrl: 'https://www.vectorlogo.zone/logos/gitlab/gitlab-icon.svg' },
-                { name: 'Shell Scripting', iconUrl: 'https://upload.vectorlogo.zone/logos/gnu_bash/images/66582b8e-a291-4a1b-b89c-76628277a33b.svg' },
             ],
         },
-
         {
             category: 'Monitoring & Observability',
             icon: Monitor,
@@ -123,13 +123,6 @@ export const about = {
             items: [
                 { name: 'Python', iconUrl: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg' },
                 { name: 'Bash', iconUrl: 'https://upload.vectorlogo.zone/logos/gnu_bash/images/66582b8e-a291-4a1b-b89c-76628277a33b.svg' },
-            ],
-        },
-        {
-            category: 'Tools & OS',
-            icon: Wrench,
-            items: [
-                { name: 'Linux', iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png' },
             ],
         },
     ],
@@ -160,7 +153,7 @@ export const contact = {
         heading: 'Looking for a DevOps Engineer?',
         body: "I'm currently open to new opportunities and would love to discuss how I can contribute to your team.",
         resumePath: '/resume.pdf',
-        resumeDriveLink: 'https://drive.google.com/file/d/1vNl4eprM9F6LfbUGiYfRwIh464Zc5pSr/view?usp=sharing',
+        resumeDriveLink: 'https://drive.google.com/file/d/10bihR728rXyvaNHt68AFia9EFhATAf5G/view?usp=sharing',
     },
     formEndpoint: '',
     footerText: '© 2025 Shahid Shahadat Khan. Built with Next.js, TypeScript, and Tailwind CSS.',

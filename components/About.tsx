@@ -6,49 +6,54 @@ import { Terminal, Code2 } from 'lucide-react';
 
 export default function About() {
     return (
-        <section id="about" className="py-20 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 dark:from-gray-900 dark:via-gray-850 dark:to-gray-900 relative overflow-hidden">
-            {/* Grid background */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f1a_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f1a_1px,transparent_1px)] bg-[size:14px_24px] opacity-20" />
+        <section id="about" className="min-h-screen flex items-center justify-center py-16 bg-gradient-to-b from-slate-950 via-indigo-950/50 to-slate-950 relative overflow-hidden">
+            {/* Modern grid background */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#6366f1_1px,transparent_1px),linear-gradient(to_bottom,#6366f1_1px,transparent_1px)] bg-[size:20px_20px] opacity-5" />
+            
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/10 via-transparent to-purple-950/10" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <Reveal>
-                    <div className="text-center mb-16">
-                        <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-slate-800/80 rounded-lg border border-cyan-500/30">
-                            <Terminal className="w-5 h-5 text-cyan-400" />
-                            <span className="text-cyan-400 font-mono text-sm">$ terraform plan -out=about.tfplan</span>
+                    <div className="text-center mb-12">
+                        <div className="inline-flex items-center gap-3 mb-4 px-6 py-3 bg-slate-900/60 backdrop-blur-xl rounded-2xl border border-indigo-500/30 shadow-2xl shadow-indigo-500/10">
+                            <Terminal className="w-5 h-5 text-indigo-400" />
+                            <span className="text-indigo-400 font-mono text-sm font-medium">$ terraform plan -out=about.tfplan</span>
                         </div>
                         <h2 className="text-4xl md:text-5xl font-bold text-gray-100 mb-4">
                             About Me
                         </h2>
-                        <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 mx-auto rounded-full" />
+                        <div className="w-20 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mx-auto rounded-full" />
                     </div>
                 </Reveal>
 
                 <div className="max-w-4xl mx-auto space-y-8">
-                    {/* Bio Section */}
+                    {/* Modern Bio Section */}
                     <Reveal delay={0.2}>
-                        <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-cyan-500/20 hover:border-cyan-500/40 hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300">
-                            <p className="text-lg text-gray-300 leading-relaxed">
+                        <div className="bg-slate-900/40 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-indigo-500/20 hover:border-indigo-500/40 hover:shadow-3xl hover:shadow-indigo-500/20 transition-all duration-500">
+                            <p className="text-lg text-gray-300 leading-relaxed font-light">
                                 {about.bio}
                             </p>
                         </div>
                     </Reveal>
 
-                    {/* Education Section */}
+                    {/* Modern Education Section */}
                     <Reveal delay={0.3}>
-                        <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-blue-500/20 hover:border-blue-500/40 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300">
-                            <div className="flex items-center gap-2 mb-4">
-                                <Code2 className="w-6 h-6 text-blue-400" />
+                        <div className="bg-slate-900/40 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-purple-500/20 hover:border-purple-500/40 hover:shadow-3xl hover:shadow-purple-500/20 transition-all duration-500">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="p-3 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl border border-purple-500/30 backdrop-blur-sm">
+                                    <Code2 className="w-6 h-6 text-purple-400" />
+                                </div>
                                 <h3 className="text-2xl font-bold text-gray-100">Education</h3>
                             </div>
-                            <div className="space-y-2">
-                                <p className="text-gray-200 font-semibold">
+                            <div className="space-y-3">
+                                <p className="text-gray-200 font-semibold text-lg">
                                     {about.education.degree}
                                 </p>
-                                <p className="text-gray-400">
+                                <p className="text-gray-400 text-lg">
                                     {about.education.school}
                                 </p>
-                                <p className="text-gray-500 text-sm font-mono">
+                                <p className="text-gray-500 text-sm font-mono bg-slate-900/40 inline-block px-4 py-2 rounded-lg">
                                     {about.education.status}
                                 </p>
                             </div>
@@ -56,9 +61,9 @@ export default function About() {
                     </Reveal>
                 </div>
 
-                {/* Background decorative elements */}
-                <div className="absolute top-10 right-10 w-64 h-64 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full filter blur-3xl opacity-30 pointer-events-none" />
-                <div className="absolute bottom-10 left-10 w-64 h-64 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full filter blur-3xl opacity-30 pointer-events-none" />
+                {/* Modern background decorative elements */}
+                <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-full filter blur-3xl opacity-40 pointer-events-none" />
+                <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full filter blur-3xl opacity-40 pointer-events-none" />
             </div>
         </section>
     );
