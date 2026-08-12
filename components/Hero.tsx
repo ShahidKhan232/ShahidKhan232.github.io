@@ -17,16 +17,28 @@ export default function Hero() {
     return (
         <section
             id="home"
-            className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950 pt-16 overflow-hidden"
+            className="min-h-screen flex items-center justify-center relative section-cloud pt-16 overflow-hidden"
         >
             {/* Animated grid background */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#6366f1_1px,transparent_1px),linear-gradient(to_bottom,#6366f1_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-10" />
+            <div className="section-grid opacity-10" />
             
             {/* Modern gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/20 via-transparent to-purple-950/20" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
                 <Reveal className="text-center">
+                    {/* System status bar */}
+                    <div className="flex flex-wrap justify-center gap-4 mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/50 backdrop-blur-sm rounded-xl border border-green-500/30 text-sm font-mono">
+                            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                            <span className="text-green-400">All systems operational</span>
+                        </div>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900/50 backdrop-blur-sm rounded-xl border border-indigo-500/30 text-sm font-mono text-indigo-400">
+                            <Cloud className="w-4 h-4" />
+                            <span>AWS · Kubernetes · Terraform</span>
+                        </div>
+                    </div>
+
                     {/* Modern terminal-style greeting */}
                     <div className="inline-flex items-center gap-3 mb-4 px-6 py-3 bg-slate-900/60 backdrop-blur-xl rounded-2xl border border-indigo-500/30 shadow-2xl shadow-indigo-500/10">
                         <Terminal className="w-5 h-5 text-indigo-400" />

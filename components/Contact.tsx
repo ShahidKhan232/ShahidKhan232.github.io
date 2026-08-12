@@ -52,17 +52,14 @@ export default function Contact() {
     };
 
     return (
-        <section id="contact" className="min-h-screen flex items-center justify-center py-16 bg-gradient-to-b from-slate-950 via-indigo-950/50 to-slate-950 relative overflow-hidden">
-            {/* Modern grid background */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#6366f1_1px,transparent_1px),linear-gradient(to_bottom,#6366f1_1px,transparent_1px)] bg-[size:20px_20px] opacity-5" />
-            
-            {/* Gradient overlay */}
+        <section id="contact" className="min-h-screen flex items-center justify-center py-16 section-cloud">
+            <div className="section-grid opacity-5" />
             <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/10 via-transparent to-purple-950/10" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <Reveal>
                     <div className="text-center mb-12">
-                        <div className="inline-flex items-center gap-3 mb-4 px-6 py-3 bg-slate-900/60 backdrop-blur-xl rounded-2xl border border-indigo-500/30 shadow-2xl shadow-indigo-500/10">
+                        <div className="terminal-badge mb-4">
                             <Send className="w-5 h-5 text-indigo-400" />
                             <span className="text-indigo-400 font-mono text-sm font-medium">$ curl -X POST /api/contact</span>
                         </div>
@@ -77,7 +74,7 @@ export default function Contact() {
                     {/* Modern Contact Info */}
                     <div className="space-y-6">
                         <Reveal delay={0.2}>
-                            <div className="bg-slate-900/40 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-indigo-500/20 hover:border-indigo-500/40 transition-all">
+                            <div className="glass-card p-8 shadow-2xl">
                                 <h3 className="text-2xl font-bold text-gray-100 mb-4">
                                     {contact.cta.heading}
                                 </h3>

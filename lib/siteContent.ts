@@ -1,12 +1,12 @@
 import { Code2, Wrench, Cloud, Monitor, Mail, Phone, MapPin } from 'lucide-react';
 
 export const navItems = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Skills', href: '/skills' },
-    { name: 'Experience', href: '/experience' },
-    { name: 'Projects', href: '/portfolio' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Home', href: '#home' },
+    { name: 'About', href: '#about' },
+    { name: 'Skills', href: '#skills' },
+    { name: 'Experience', href: '#experience' },
+    { name: 'Projects', href: '#portfolio' },
+    { name: 'Contact', href: '#contact' },
 ];
 
 export const hero = {
@@ -32,6 +32,17 @@ export const projects = [
         github: 'https://github.com/ShahidKhan232/Multi-Env-IaC',
         image: '/Images/Multi-env-project.gif',
         color: 'from-purple-500 via-indigo-500 to-blue-500',
+        category: 'Cloud & IaC',
+    },
+    {
+        title: 'Netflix Clone Deployment on Kubernetes with DevSecOps CI/CD Pipeline',
+        description:
+            'A production-ready Netflix clone featuring a modern React/TypeScript frontend with comprehensive DevOps infrastructure including Docker, Kubernetes, Jenkins CI/CD, and Terraform IaC.',
+        technologies: ['AWS', 'Terraform', 'Jenkins', 'Docker', 'GitHub Actions', 'Kubernetes', 'Trivy', 'SonarQube', 'Prometheus', 'Grafana', 'Slack'],
+        github: 'https://github.com/ShahidKhan232/Netflix-clone-k8s-end-to-end.git',
+        image: '/Images/netflix-clone.gif',
+        color: 'from-purple-500 via-indigo-500 to-blue-500',
+        category: 'Kubernetes',
     },
     {
         title: 'Wisecow Application Deployment on AWS EKS',
@@ -41,6 +52,7 @@ export const projects = [
         github: 'https://github.com/ShahidKhan232/Containerisation-and-Deployment-of-Wisecow-Application-on-Kubernetes-',
         image: '/Images/wisecow-deployment.png',
         color: 'from-blue-500 via-cyan-500 to-teal-500',
+        category: 'Kubernetes',
     },
     {
         title: 'Three-Tier High Availability Architecture on AWS',
@@ -50,6 +62,7 @@ export const projects = [
         github: 'https://github.com/ShahidKhan232/Cloud-Projects/tree/main/Three-Tier-Architecture',
         image: '/Images/three-tier-project.png',
         color: 'from-orange-500 via-red-500 to-pink-500',
+        category: 'Cloud & IaC',
     },
     {
         title: 'Serverless Image Processing & Cost Optimization',
@@ -59,6 +72,7 @@ export const projects = [
         github: 'https://github.com/ShahidKhan232/Cloud-Projects/tree/main/AWS-Serverless',
         image: '/Images/Serverless.gif',
         color: 'from-green-500 via-emerald-500 to-teal-500',
+        category: 'Cloud & IaC',
     },
     {
         title: 'Automated Monitoring & Alerting System',
@@ -68,8 +82,11 @@ export const projects = [
         github: 'https://github.com/ShahidKhan232/AlertOps-Automated-Incident-Response-System',
         image: '/Images/alertops.png',
         color: 'from-yellow-500 via-orange-500 to-red-500',
+        category: 'Monitoring',
     },
 ];
+
+export const projectFilters = ['All', 'Cloud & IaC', 'Kubernetes', 'Monitoring'] as const;
 
 
 export const about = {
@@ -77,6 +94,7 @@ export const about = {
     education: {
         degree: 'Bachelor of Engineering in Computer Engineering',
         school: 'Gharda Institute of Technology, Khed, Maharashtra',
+        location: 'Khed, Maharashtra, India',
         status: 'Aug 2022 – May 2026',
     },
     skills: [
@@ -84,7 +102,7 @@ export const about = {
             category: 'Infrastructure & Cloud',
             icon: Cloud,
             items: [
-                { name: 'AWS', iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/2560px-Amazon_Web_Services_Logo.svg.png' },
+                { name: 'AWS', iconUrl: 'https://upload.vectorlogo.zone/logos/amazon_aws/images/258f08ea-4505-4b45-948c-fe14c8cd130c.svg' },
                 { name: 'Terraform', iconUrl: 'https://www.vectorlogo.zone/logos/terraformio/terraformio-icon.svg' },
                 { name: 'Ansible', iconUrl: 'https://www.vectorlogo.zone/logos/ansible/ansible-icon.svg' },
             ],
@@ -152,7 +170,7 @@ export const contact = {
         {
             icon: MapPin,
             label: 'Location',
-            value: 'Devgad, Maharashtra, India',
+            value: 'Mumbai, Maharashtra, India',
             href: '#',
         },
     ],
@@ -163,7 +181,7 @@ export const contact = {
         resumeDriveLink: 'https://drive.google.com/file/d/1vNl4eprM9F6LfbUGiYfRwIh464Zc5pSr/view?usp=sharing',
     },
     formEndpoint: '',
-    footerText: '© 2025 Shahid Khan. Built with Next.js, TypeScript, and Tailwind CSS.',
+    footerText: '© 2026 Shahid Khan. Built with Next.js, TypeScript, and Tailwind CSS.',
 };
 
 export const experience = [
@@ -185,7 +203,7 @@ export const experience = [
 ];
 
 export const stats = [
-    { label: 'Projects Completed', value: 5, suffix: '+' },
+    { label: 'Projects Completed', value: 6, suffix: '+' },
     { label: 'Technologies Mastered', value: 20, suffix: '+' },
     { label: 'Deployment Time Reduction', value: 65, suffix: '%' },
     { label: 'Uptime Achievement', value: 99.9, suffix: '%' },

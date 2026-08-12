@@ -1,16 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, CloudCog } from 'lucide-react';
 import { navItems } from '@/lib/siteContent';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState('');
     const pathname = usePathname();
+    const router = useRouter();
 
     useEffect(() => {
         // Only add scroll listener on client-side
@@ -42,22 +43,32 @@ export default function Navigation() {
     }, []);
 
     const isActive = (href: string) => {
-        if (href.startsWith('#')) {
-            return activeSection === href;
-        }
-        return pathname === href;
+        return activeSection === href;
     };
 
     const handleNavClick = (href: string) => {
+        if (typeof window === 'undefined') return;
         if (href.startsWith('#')) {
-            // Only scroll on client-side
-            if (typeof window !== 'undefined') {
+            if (pathname !== '/') {
+                // Navigate to home page first, then scroll
+                router.push('/' + href);
+            } else {
                 const sectionId = href.substring(1);
                 const section = document.getElementById(sectionId);
                 if (section) {
                     section.scrollIntoView({ behavior: 'smooth' });
                 }
             }
+        }
+    };
+
+    const handleLogoClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        if (pathname !== '/') {
+            router.push('/');
+        } else {
+            const home = document.getElementById('home');
+            if (home) home.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
@@ -72,13 +83,13 @@ export default function Navigation() {
                 <div className="flex justify-between items-center h-14">
                     <Link
                         href="/"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            handleNavClick('#home');
-                        }}
-                        className="text-xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent transition-all hover:scale-105 font-mono"
+                        onClick={handleLogoClick}
+                        className="flex items-center gap-2 text-xl font-bold transition-all hover:scale-105 font-mono group"
                     >
-                        Shahid Khan
+                        <CloudCog className="w-6 h-6 text-indigo-400 group-hover:rotate-12 transition-transform duration-300" />
+                        <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                            Shahid Khan
+                        </span>
                     </Link>
 
                     {/* Desktop Navigation */}

@@ -13,7 +13,7 @@ export default function AboutPage() {
             <CloudBackground />
             <ParticleBackground />
             <Navigation />
-            <main className="bg-white dark:bg-gray-900 pt-16">
+            <main className="bg-slate-950 pt-16">
                 <About />
             </main>
         </div>
