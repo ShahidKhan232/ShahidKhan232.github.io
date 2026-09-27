@@ -23,7 +23,7 @@ export const hero = {
     },
     resumePath: '/resume.pdf',
     resumeDriveLink:
-        'https://drive.google.com/file/d/10bihR728rXyvaNHt68AFia9EFhATAf5G/view?usp=sharing',
+        'https://drive.google.com/file/d/1xxHLJrOQjcrPs-1G43xxpq6XtHjJka6t/view?usp=sharing',
 };
 
 export const infrastructureIndicators = [
@@ -408,6 +408,6 @@ export const footer = {
         github: 'https://github.com/ShahidKhan232',
         linkedin: 'https://linkedin.com/in/shahid-khan-985919317',
         resume:
-            'https://docs.google.com/document/d/12tKerOQWrWihxdIF00lFtLe5E3fM3Uz27ITebIAeF-Y/edit?usp=sharing',
+            'https://drive.google.com/file/d/1xxHLJrOQjcrPs-1G43xxpq6XtHjJka6t/view?usp=sharing',
     },
 };
