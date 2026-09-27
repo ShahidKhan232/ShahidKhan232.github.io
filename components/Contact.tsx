@@ -2,209 +2,180 @@
 
 import { useState } from 'react';
 import { contact } from '@/lib/siteContent';
+import SectionHeader from './SectionHeader';
 import Reveal from './Reveal';
-import { motion } from 'framer-motion';
-import { Send, Loader2 } from 'lucide-react';
+import { Send, Loader2, Download } from 'lucide-react';
 
 export default function Contact() {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        message: '',
-    });
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+    const validate = () => {
+        const errors: Record<string, string> = {};
+        if (!formData.name.trim()) errors.name = 'Name is required';
+        if (!formData.email.trim()) errors.email = 'Email is required';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errors.email = 'Enter a valid email';
+        if (!formData.message.trim()) errors.message = 'Message is required';
+        setFieldErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!validate()) return;
+
         setStatus('loading');
 
-        // If no form endpoint, open mailto
         if (!contact.formEndpoint) {
-            const mailtoLink = `mailto:${contact.contactInfo[0].value}?subject=Portfolio Contact from ${formData.name}&body=${formData.message}`;
-            window.location.href = mailtoLink;
+            const body = encodeURIComponent(
+                `From: ${formData.name} (${formData.email})\n\n${formData.message}`
+            );
+            window.location.href = `mailto:shahidkhan.95173@gmail.com?subject=${encodeURIComponent(
+                `Portfolio contact from ${formData.name}`
+            )}&body=${body}`;
             setStatus('success');
-            setTimeout(() => {
-                setStatus('idle');
-                setFormData({ name: '', email: '', message: '' });
-            }, 3000);
+            setFormData({ name: '', email: '', message: '' });
+            setTimeout(() => setStatus('idle'), 3000);
             return;
         }
 
-        // Otherwise submit to endpoint
         try {
             const response = await fetch(contact.formEndpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
-
             if (response.ok) {
                 setStatus('success');
                 setFormData({ name: '', email: '', message: '' });
-            } else {
-                setStatus('error');
-            }
-        } catch (error) {
+            } else setStatus('error');
+        } catch {
             setStatus('error');
         }
-
         setTimeout(() => setStatus('idle'), 3000);
     };
 
     return (
-        <section id="contact" className="min-h-screen flex items-center justify-center py-16 section-cloud">
-            <div className="section-grid opacity-5" />
-            <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/10 via-transparent to-purple-950/10" />
+        <section id="contact" className="relative py-20 md:py-28 bg-[#07090d]">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <SectionHeader
+                    number="05 / CONTACT"
+                    title={contact.headline}
+                    subtitle={contact.subtext}
+                />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <Reveal>
-                    <div className="text-center mb-12">
-                        <div className="terminal-badge mb-4">
-                            <Send className="w-5 h-5 text-indigo-400" />
-                            <span className="text-indigo-400 font-mono text-sm font-medium">$ curl -X POST /api/contact</span>
-                        </div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-gray-100 mb-4">
-                            Get In Touch
-                        </h2>
-                        <div className="w-20 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mx-auto rounded-full" />
-                    </div>
-                </Reveal>
-
-                <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-                    {/* Modern Contact Info */}
-                    <div className="space-y-6">
-                        <Reveal delay={0.2}>
-                            <div className="glass-card p-8 shadow-2xl">
-                                <h3 className="text-2xl font-bold text-gray-100 mb-4">
-                                    {contact.cta.heading}
-                                </h3>
-                                <p className="text-gray-300 mb-6 text-lg font-light leading-relaxed">
-                                    {contact.cta.body}
-                                </p>
-                                <motion.a
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    href={contact.cta.resumeDriveLink || contact.cta.resumePath}
-                                    {...(contact.cta.resumeDriveLink
-                                        ? { target: '_blank', rel: 'noopener noreferrer' }
-                                        : { download: true })}
-                                    className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all font-semibold shadow-xl shadow-indigo-500/30 text-lg"
-                                >
-                                    Download Resume
-                                </motion.a>
-                            </div>
-                        </Reveal>
-
-                        <div className="space-y-4">
-                            {contact.contactInfo.map((info, index) => {
-                                const Icon = info.icon as any;
+                <div className="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                    <Reveal delay={0.1}>
+                        <div className="space-y-3">
+                            {contact.contactInfo.map((info) => {
+                                const Icon = info.icon;
                                 return (
-                                    <Reveal key={index} delay={0.3 + index * 0.1}>
-                                        <motion.a
-                                            href={info.href}
-                                            whileHover={{ x: 8 }}
-                                            className="flex items-center gap-4 p-4 bg-slate-900/40 backdrop-blur-xl rounded-xl shadow-lg hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-500 border border-indigo-500/20 hover:border-indigo-500/40"
-                                        >
-                                            <div className="p-3 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-xl border border-indigo-500/30 backdrop-blur-sm">
-                                                <Icon className="w-6 h-6 text-indigo-400" />
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-gray-400 font-mono mb-1">{info.label}</p>
-                                                <p className="font-semibold text-gray-100">{info.value}</p>
-                                            </div>
-                                        </motion.a>
-                                    </Reveal>
+                                    <a
+                                        key={info.label}
+                                        href={info.href}
+                                        className="flex items-center gap-4 p-4 rounded-xl border border-zinc-800/80 bg-zinc-900/20 hover:border-cyan-500/25 transition-colors"
+                                    >
+                                        <div className="p-2 rounded-lg bg-zinc-900 border border-zinc-800">
+                                            <Icon className="w-5 h-5 text-cyan-400/80" />
+                                        </div>
+                                        <div>
+                                            <p className="font-mono text-[10px] text-zinc-500">{info.label}</p>
+                                            <p className="text-sm text-zinc-200">{info.value}</p>
+                                        </div>
+                                    </a>
                                 );
                             })}
+                            <a
+                                href={contact.resumeDriveLink || contact.resumePath}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-secondary w-full inline-flex items-center justify-center gap-2 mt-4"
+                            >
+                                <Download className="w-4 h-4" />
+                                Resume
+                            </a>
                         </div>
-                    </div>
+                    </Reveal>
 
-                    {/* Modern Contact Form */}
-                    <Reveal delay={0.4}>
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                    <Reveal delay={0.15}>
+                        <form
+                            onSubmit={handleSubmit}
+                            noValidate
+                            className="panel-glass rounded-2xl p-6 md:p-8 border border-zinc-800/80 space-y-5"
+                        >
                             <div>
-                                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2 font-mono">
+                                <label htmlFor="name" className="block font-mono text-xs text-zinc-500 mb-2">
                                     Name
                                 </label>
                                 <input
-                                    type="text"
                                     id="name"
-                                    required
+                                    type="text"
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                    className="w-full px-4 py-3 bg-slate-900/60 backdrop-blur-xl border border-indigo-500/30 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none text-gray-100 placeholder-gray-500 font-mono"
-                                    placeholder="Your name"
+                                    className="input-field"
+                                    autoComplete="name"
                                 />
+                                {fieldErrors.name && (
+                                    <p className="text-xs text-red-400 mt-1">{fieldErrors.name}</p>
+                                )}
                             </div>
-
                             <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2 font-mono">
+                                <label htmlFor="email" className="block font-mono text-xs text-zinc-500 mb-2">
                                     Email
                                 </label>
                                 <input
-                                    type="email"
                                     id="email"
-                                    required
+                                    type="email"
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className="w-full px-4 py-3 bg-slate-900/60 backdrop-blur-xl border border-indigo-500/30 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none text-gray-100 placeholder-gray-500 font-mono"
-                                    placeholder="your.email@example.com"
+                                    className="input-field"
+                                    autoComplete="email"
                                 />
+                                {fieldErrors.email && (
+                                    <p className="text-xs text-red-400 mt-1">{fieldErrors.email}</p>
+                                )}
                             </div>
-
                             <div>
-                                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2 font-mono">
+                                <label htmlFor="message" className="block font-mono text-xs text-zinc-500 mb-2">
                                     Message
                                 </label>
                                 <textarea
                                     id="message"
-                                    required
                                     rows={5}
                                     value={formData.message}
                                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                    className="w-full px-4 py-3 bg-slate-900/60 backdrop-blur-xl border border-indigo-500/30 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none resize-none text-gray-100 placeholder-gray-500 font-mono"
-                                    placeholder="Your message..."
+                                    className="input-field resize-none"
                                 />
+                                {fieldErrors.message && (
+                                    <p className="text-xs text-red-400 mt-1">{fieldErrors.message}</p>
+                                )}
                             </div>
-
-                            <motion.button
+                            <button
                                 type="submit"
                                 disabled={status === 'loading'}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="w-full px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all font-semibold flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl shadow-indigo-500/30 font-mono"
+                                className="btn-primary w-full inline-flex items-center justify-center gap-2 disabled:opacity-50"
                             >
                                 {status === 'loading' ? (
                                     <>
-                                        <Loader2 className="w-5 h-5 animate-spin" />
-                                        Sending...
+                                        <Loader2 className="w-4 h-4 animate-spin" />
+                                        Sending…
                                     </>
                                 ) : status === 'success' ? (
-                                    'Message Sent!'
+                                    'Opening mail client…'
                                 ) : status === 'error' ? (
-                                    'Error - Try Again'
+                                    'Error — try again'
                                 ) : (
                                     <>
-                                        <Send className="w-5 h-5" />
+                                        <Send className="w-4 h-4" />
                                         Send Message
                                     </>
                                 )}
-                            </motion.button>
+                            </button>
                         </form>
                     </Reveal>
                 </div>
-
-                {/* Modern Footer */}
-                <Reveal delay={0.6}>
-                    <div className="mt-16 text-center text-gray-400 font-mono">
-                        <p>{contact.footerText}</p>
-                    </div>
-                </Reveal>
             </div>
-
-            {/* Modern background decorative elements */}
-            <div className="absolute top-1/4 left-20 w-96 h-96 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-full filter blur-3xl opacity-40 pointer-events-none" />
-            <div className="absolute bottom-1/4 right-20 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full filter blur-3xl opacity-40 pointer-events-none" />
         </section>
     );
 }

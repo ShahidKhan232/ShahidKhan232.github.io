@@ -1,16 +1,50 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
+import Navigation from '@/components/Navigation';
+import ScrollProgress from '@/components/ScrollProgress';
+import Footer from '@/components/Footer';
 import './globals.css';
 
-const inter = Inter({
+const sans = Plus_Jakarta_Sans({
     subsets: ['latin'],
     display: 'swap',
+    variable: '--font-sans',
 });
 
+const mono = JetBrains_Mono({
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-mono',
+});
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    themeColor: '#060B12',
+};
+
 export const metadata: Metadata = {
-    title: 'Shahid Khan | DevOps & Cloud Engineer',
-    description: 'DevOps Engineer specializing in AWS, Docker, Kubernetes, CI/CD pipelines, and cloud infrastructure automation. Building scalable, automated cloud solutions.',
-    keywords: ['DevOps', 'AWS', 'Docker', 'Kubernetes', 'CI/CD', 'Cloud Infrastructure', 'Terraform', 'Jenkins'],
+    title: {
+        default: 'Shahid Khan | DevOps & Cloud Engineer',
+        template: '%s | Shahid Khan',
+    },
+    description:
+        'Shahid Khan is a DevOps & Cloud Engineer specializing in AWS, Kubernetes, Terraform, Docker, CI/CD, and cloud infrastructure automation.',
+    keywords: [
+        'DevOps',
+        'Cloud Engineer',
+        'AWS',
+        'Kubernetes',
+        'Terraform',
+        'Docker',
+        'CI/CD',
+        'Ansible',
+        'Jenkins',
+        'Prometheus',
+        'Grafana',
+        'Infrastructure as Code',
+    ],
     authors: [{ name: 'Shahid Khan' }],
     creator: 'Shahid Khan',
     openGraph: {
@@ -18,13 +52,15 @@ export const metadata: Metadata = {
         locale: 'en_US',
         url: 'https://shahidkhan232.github.io',
         title: 'Shahid Khan | DevOps & Cloud Engineer',
-        description: 'DevOps Engineer specializing in AWS, Docker, Kubernetes, and cloud infrastructure automation.',
+        description:
+            'Shahid Khan is a DevOps & Cloud Engineer specializing in AWS, Kubernetes, Terraform, Docker, CI/CD, and cloud infrastructure automation.',
         siteName: 'Shahid Khan Portfolio',
     },
     twitter: {
         card: 'summary_large_image',
         title: 'Shahid Khan | DevOps & Cloud Engineer',
-        description: 'DevOps Engineer specializing in AWS, Docker, Kubernetes, and cloud infrastructure automation.',
+        description:
+            'DevOps & Cloud Engineer — AWS, Kubernetes, Terraform, CI/CD, and cloud infrastructure automation.',
     },
     robots: {
         index: true,
@@ -38,9 +74,14 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className="dark">
-            <body className={inter.className}>
-                {children}
+        <html lang="en" className="dark scroll-smooth">
+            <body className={`${sans.className} ${mono.variable} font-sans antialiased bg-[#060B12] text-zinc-100 min-h-screen flex flex-col overflow-x-hidden w-full relative`}>
+                <ScrollProgress />
+                <Navigation />
+                <main className="flex-1 w-full max-w-full overflow-x-hidden">
+                    {children}
+                </main>
+                <Footer />
             </body>
         </html>
     );

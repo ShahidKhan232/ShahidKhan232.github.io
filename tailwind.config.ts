@@ -9,49 +9,47 @@ const config: Config = {
     darkMode: 'class',
     theme: {
         extend: {
+            fontFamily: {
+                sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+                mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+            },
             colors: {
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
+                aws: {
+                    DEFAULT: '#FF9900',
+                    light: '#FFB84D',
+                    dark: '#E08500',
+                },
+                k8s: {
+                    DEFAULT: '#326CE5',
+                    light: '#5B8DEE',
+                    dark: '#2452B5',
+                },
+                control: {
+                    bg: '#060B12',
+                    surface: '#0A111C',
+                    panel: '#101A28',
+                    card: '#131F2E',
+                    border: '#1E2C3F',
+                    'border-light': '#2A3C54',
+                },
+                obs: {
+                    green: '#10B981',
+                    amber: '#F59E0B',
+                    red: '#EF4444',
+                    blue: '#3B82F6',
+                },
             },
             animation: {
-                'pulse': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                pulse: 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                 'float-slow': 'float-slow 8s ease-in-out infinite',
-                'float-medium': 'float-medium 6s ease-in-out infinite',
-                'gradient': 'gradient 8s linear infinite',
             },
             keyframes: {
                 pulse: {
-                    '0%, 100%': { opacity: '0.3' },
-                    '50%': { opacity: '0.5' },
-                },
-                'float-slow': {
-                    '0%, 100%': {
-                        transform: 'translateY(0px) translateX(0px) rotate(0deg)',
-                    },
-                    '33%': {
-                        transform: 'translateY(-20px) translateX(10px) rotate(5deg)',
-                    },
-                    '66%': {
-                        transform: 'translateY(-10px) translateX(-10px) rotate(-5deg)',
-                    },
-                },
-                'float-medium': {
-                    '0%, 100%': {
-                        transform: 'translateY(0px) translateX(0px) rotate(0deg)',
-                    },
-                    '50%': {
-                        transform: 'translateY(-15px) translateX(15px) rotate(10deg)',
-                    },
-                },
-                gradient: {
-                    '0%, 100%': {
-                        'background-size': '200% 200%',
-                        'background-position': 'left center',
-                    },
-                    '50%': {
-                        'background-size': '200% 200%',
-                        'background-position': 'right center',
-                    },
+                    '0%, 100%': { opacity: '0.4' },
+                    '50%': { opacity: '0.8' },
                 },
             },
         },

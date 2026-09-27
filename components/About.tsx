@@ -1,60 +1,87 @@
 'use client';
 
-import { about } from '@/lib/siteContent';
+import { about, engineeringPrinciples } from '@/lib/siteContent';
+import SectionHeader from './SectionHeader';
 import Reveal from './Reveal';
-import { Terminal, GraduationCap } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 export default function About() {
+    const reduceMotion = useReducedMotion();
+
     return (
-        <section id="about" className="min-h-screen flex items-center justify-center py-16 section-cloud">
-            <div className="section-grid opacity-5" />
-            <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/10 via-transparent to-purple-950/10" />
+        <section id="about" className="relative py-20 md:py-28 bg-[#07090d]">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <SectionHeader
+                    number="01 / ABOUT"
+                    title="Engineering Profile"
+                    subtitle="Cloud infrastructure with reliability, security, and automation at the center."
+                    align="left"
+                />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <Reveal>
-                    <div className="text-center mb-12">
-                        <div className="terminal-badge mb-4">
-                            <Terminal className="w-5 h-5 text-indigo-400" />
-                            <span className="text-indigo-400 font-mono text-sm font-medium">$ terraform plan -out=about.tfplan</span>
-                        </div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-gray-100 mb-4">
-                            About Me
-                        </h2>
-                        <div className="w-20 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mx-auto rounded-full" />
-                    </div>
-                </Reveal>
-
-                <div className="max-w-4xl mx-auto space-y-8">
-                    <Reveal delay={0.2}>
-                        <div className="glass-card p-8 shadow-2xl">
-                            <p className="text-lg text-gray-300 leading-relaxed font-light">
-                                {about.bio}
-                            </p>
-                        </div>
+                <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+                    <Reveal delay={0.1}>
+                        <p className="text-lg text-zinc-400 leading-relaxed">{about.intro}</p>
+                        <p className="mt-6 text-sm text-zinc-500 leading-relaxed">
+                            {about.profile.educationDetail}
+                        </p>
                     </Reveal>
 
-                    <Reveal delay={0.3}>
-                        <div className="glass-card p-8 shadow-2xl border-purple-500/20 hover:border-purple-500/40 hover:shadow-purple-500/20">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="p-3 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl border border-purple-500/30 backdrop-blur-sm">
-                                    <GraduationCap className="w-6 h-6 text-purple-400" />
+                    <Reveal delay={0.15}>
+                        <div className="panel-glass rounded-2xl p-6 md:p-8 border border-zinc-800/80 space-y-6">
+                            {[
+                                { label: 'ROLE', value: about.profile.role },
+                                { label: 'EDUCATION', value: about.profile.education },
+                                { label: 'LOCATION', value: about.profile.location },
+                            ].map((row) => (
+                                <div key={row.label} className="border-b border-zinc-800/80 pb-4 last:border-0 last:pb-0">
+                                    <p className="font-mono text-[10px] tracking-widest text-zinc-500 mb-1">
+                                        {row.label}
+                                    </p>
+                                    <p className="text-zinc-100">{row.value}</p>
                                 </div>
-                                <h3 className="text-2xl font-bold text-gray-100">Education</h3>
-                            </div>
-                            <div className="space-y-3">
-                                <p className="text-gray-200 font-semibold text-lg">
-                                    {about.education.degree}
-                                </p>
-                                <p className="text-gray-400 text-lg">
-                                    {about.education.school}
-                                </p>
-                                <p className="text-gray-500 text-sm font-mono bg-slate-900/40 inline-block px-4 py-2 rounded-lg">
-                                    {about.education.status}
-                                </p>
+                            ))}
+                            <div>
+                                <p className="font-mono text-[10px] tracking-widest text-zinc-500 mb-3">FOCUS</p>
+                                <div className="flex flex-wrap gap-2">
+                                    {about.profile.focus.map((item) => (
+                                        <span
+                                            key={item}
+                                            className="px-2.5 py-1 rounded-md bg-zinc-900/80 border border-zinc-800 text-xs font-mono text-zinc-400"
+                                        >
+                                            {item}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </Reveal>
                 </div>
+
+                <Reveal delay={0.2} className="mt-16">
+                    <p className="font-mono text-[10px] tracking-widest text-zinc-500 mb-4 text-center">
+                        ENGINEERING PRINCIPLES
+                    </p>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
+                        {engineeringPrinciples.map((principle, i) => (
+                            <motion.div
+                                key={principle}
+                                className="text-center py-4 rounded-xl border border-zinc-800/80 bg-zinc-900/30 font-mono text-sm text-cyan-400/90"
+                                animate={
+                                    reduceMotion
+                                        ? undefined
+                                        : { opacity: [0.7, 1, 0.7] }
+                                }
+                                transition={
+                                    reduceMotion
+                                        ? undefined
+                                        : { duration: 4, repeat: Infinity, delay: i * 0.5 }
+                                }
+                            >
+                                {principle}
+                            </motion.div>
+                        ))}
+                    </div>
+                </Reveal>
             </div>
         </section>
     );

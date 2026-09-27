@@ -4,107 +4,111 @@
 
 @layer base {
     :root {
-        --background: 222.2 84% 4.9%;
-        --foreground: 210 40% 98%;
-        --cloud-primary: 239 84% 67%;
-        --cloud-accent: 271 91% 65%;
-        --cloud-cyan: 187 92% 43%;
+        --background: 216 50% 5%; /* #060B12 */
+        --foreground: 210 20% 96%;
+        --accent: 38 100% 50%;     /* AWS orange #FF9900 */
+        --surface: 217 46% 8%;    /* #0A111C */
     }
 
     html {
         scroll-behavior: smooth;
+        background-color: #060B12;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
     }
 
     body {
-        @apply antialiased bg-slate-950 text-gray-100;
+        @apply antialiased bg-[#060B12] text-zinc-100;
+        background-color: #060B12;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+        position: relative;
     }
 
-    /* Custom Scrollbar */
     ::-webkit-scrollbar {
-        width: 10px;
+        width: 7px;
+        height: 7px;
     }
 
     ::-webkit-scrollbar-track {
-        @apply bg-gray-100 dark:bg-gray-900;
+        background-color: #060B12;
     }
 
     ::-webkit-scrollbar-thumb {
-        @apply bg-gradient-to-b from-blue-500 to-purple-600 rounded-full;
+        background-color: #1E2C3F;
+        border-radius: 4px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        @apply from-blue-600 to-purple-700;
+        background-color: #2A3C54;
+    }
+}
+
+@layer components {
+    /* Technical Infrastructure Grid */
+    .hero-grid {
+        background-image:
+            linear-gradient(to right, rgba(30, 44, 63, 0.4) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(30, 44, 63, 0.4) 1px, transparent 1px);
+        background-size: 36px 36px;
+        mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 85%);
     }
 
-    /* Subtle decorative background layers */
-    body::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        pointer-events: none;
-        background-image:
-            radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0.00) 40%),
-            radial-gradient(circle at 90% 80%, rgba(249, 115, 22, 0.06) 0%, rgba(249, 115, 22, 0.00) 35%);
-        background-repeat: no-repeat;
-        background-size: cover;
-        opacity: 1;
-        transition: opacity 300ms ease-in-out;
+    /* Cloud Control Plane Panel */
+    .panel-glass {
+        @apply bg-[#0A111C]/90 backdrop-blur-md border border-[#1E2C3F];
     }
 
-    /* Dark mode variant */
-    html.dark body::before {
-        background-image:
-            radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0.00) 40%),
-            radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.06) 0%, rgba(14, 165, 233, 0.00) 35%);
-        opacity: 0.65;
+    .control-card {
+        @apply bg-[#0A111C] border border-[#1E2C3F] rounded-xl hover:border-[#2A3C54] transition-colors;
+    }
+
+    /* Engineering Buttons */
+    .btn-primary {
+        @apply px-4 py-2 rounded-lg bg-[#38BDF8] text-[#060B12] font-semibold text-xs font-mono uppercase tracking-wider
+            hover:bg-[#0284C7] hover:text-white transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400
+            shadow-[0_0_14px_rgba(56,189,248,0.2)];
+    }
+
+    .btn-secondary {
+        @apply px-4 py-2 rounded-lg border border-[#1E2C3F] bg-[#0A111C] text-zinc-300 font-mono text-xs uppercase tracking-wider
+            hover:border-[#38BDF8]/40 hover:bg-[#101A28] hover:text-zinc-100 transition-all
+            focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400;
+    }
+
+    .btn-ghost {
+        @apply px-3 py-1.5 rounded-lg border border-[#1E2C3F] text-zinc-400 font-mono text-xs
+            hover:text-zinc-100 hover:border-[#2A3C54] hover:bg-[#0A111C] transition-colors;
+    }
+
+    .input-field {
+        @apply w-full px-3.5 py-2.5 rounded-lg bg-[#060B12] border border-[#1E2C3F] text-zinc-100 text-xs font-mono
+            placeholder:text-zinc-600 focus:border-[#38BDF8]/60 focus:ring-1 focus:ring-[#38BDF8]/30 outline-none transition-colors;
     }
 }
 
 @layer utilities {
-
-    /* Glassmorphism */
-    .glass {
-        @apply bg-white/10 dark:bg-gray-900/10 backdrop-blur-lg border border-white/20 dark:border-gray-700/20;
+    .animate-pulse-soft {
+        animation: pulse-soft 2.5s ease-in-out infinite;
     }
 
-    .glass-strong {
-        @apply bg-white/20 dark:bg-gray-900/20 backdrop-blur-xl border border-white/30 dark:border-gray-700/30;
+    @keyframes pulse-soft {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.45; }
     }
 
-    /* 3D Transform utilities */
-    .transform-3d {
-        transform-style: preserve-3d;
-    }
-
-    .backface-hidden {
-        backface-visibility: hidden;
-    }
-
-    /* Custom cursor */
-    .custom-cursor {
-        cursor: none;
-    }
-
-    /* Text gradient */
-    .text-gradient {
-        @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 dark:from-blue-400 dark:via-purple-400 dark:to-cyan-400;
-    }
-
-    /* Shared cloud/DevOps section styles */
-    .section-cloud {
-        @apply bg-gradient-to-b from-slate-950 via-indigo-950/50 to-slate-950 relative overflow-hidden;
-    }
-
-    .section-grid {
-        @apply absolute inset-0 bg-[linear-gradient(to_right,#6366f1_1px,transparent_1px),linear-gradient(to_bottom,#6366f1_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)];
-    }
-
-    .terminal-badge {
-        @apply inline-flex items-center gap-3 px-6 py-3 bg-slate-900/60 backdrop-blur-xl rounded-2xl border border-indigo-500/30 shadow-2xl shadow-indigo-500/10;
-    }
-
-    .glass-card {
-        @apply bg-slate-900/40 backdrop-blur-xl rounded-2xl border border-indigo-500/20 hover:border-indigo-500/40 hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-500;
+    @media (prefers-reduced-motion: reduce) {
+        .animate-pulse-soft {
+            animation: none;
+        }
     }
 }

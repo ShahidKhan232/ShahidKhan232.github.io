@@ -1,166 +1,213 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Menu, X, CloudCog } from 'lucide-react';
-import { navItems } from '@/lib/siteContent';
+import { Menu, X, Github, Download } from 'lucide-react';
+import { hero } from '@/lib/siteContent';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+import StatusBadge from './StatusBadge';
+
+export const routes = [
+    { name: 'HOME', href: '/' },
+    { name: 'ABOUT', href: '/about' },
+    { name: 'PROJECTS', href: '/projects' },
+    { name: 'SKILLS', href: '/skills' },
+    { name: 'EXPERIENCE', href: '/experience' },
+    { name: 'CONTACT', href: '/contact' },
+];
 
 export default function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const [activeSection, setActiveSection] = useState('');
     const pathname = usePathname();
-    const router = useRouter();
 
     useEffect(() => {
-        // Only add scroll listener on client-side
         if (typeof window === 'undefined') return;
-        
+
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-            
-            // Check which section is currently active
-            const sections = navItems.filter(item => item.href.startsWith('#'));
-            for (const item of sections) {
-                const sectionId = item.href.substring(1);
-                const section = document.getElementById(sectionId);
-                if (section) {
-                    const rect = section.getBoundingClientRect();
-                    if (rect.top <= 100 && rect.bottom >= 100) {
-                        setActiveSection(item.href);
-                        break;
-                    }
-                }
-            }
+            setScrolled(window.scrollY > 20);
         };
 
-        // Initial check
         handleScroll();
-
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const isActive = (href: string) => {
-        return activeSection === href;
-    };
+    useEffect(() => {
+        setIsOpen(false);
+    }, [pathname]);
 
-    const handleNavClick = (href: string) => {
-        if (typeof window === 'undefined') return;
-        if (href.startsWith('#')) {
-            if (pathname !== '/') {
-                // Navigate to home page first, then scroll
-                router.push('/' + href);
-            } else {
-                const sectionId = href.substring(1);
-                const section = document.getElementById(sectionId);
-                if (section) {
-                    section.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-        }
-    };
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setIsOpen(false);
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
 
-    const handleLogoClick = (e: React.MouseEvent) => {
-        e.preventDefault();
-        if (pathname !== '/') {
-            router.push('/');
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
         } else {
-            const home = document.getElementById('home');
-            if (home) home.scrollIntoView({ behavior: 'smooth' });
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
         }
+        return () => {
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+        };
+    }, [isOpen]);
+
+    const isRouteActive = (href: string) => {
+        if (href === '/') return pathname === '/';
+        return pathname.startsWith(href);
     };
 
     return (
-        <nav
-            className={`fixed w-full top-0 z-50 transition-all duration-500 ${scrolled
-                ? 'bg-slate-950/95 shadow-2xl backdrop-blur-xl border-b border-indigo-500/20'
-                : 'bg-transparent'
-                }`}
+        <header
+            className={`fixed w-full top-0 z-50 transition-all duration-300 ${
+                scrolled
+                    ? 'bg-[#060B12]/95 backdrop-blur-xl border-b border-[#1E2C3F] shadow-[0_8px_30px_rgba(0,0,0,0.5)]'
+                    : 'bg-[#060B12]/80 backdrop-blur-md border-b border-[#1E2C3F]/60'
+            }`}
         >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-14">
-                    <Link
-                        href="/"
-                        onClick={handleLogoClick}
-                        className="flex items-center gap-2 text-xl font-bold transition-all hover:scale-105 font-mono group"
-                    >
-                        <CloudCog className="w-6 h-6 text-indigo-400 group-hover:rotate-12 transition-transform duration-300" />
-                        <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                            Shahid Khan
-                        </span>
-                    </Link>
-
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center space-x-8">
-                        {navItems.map((item) => {
-                            const active = isActive(item.href);
-
-                            return (
-                                <a
-                                    key={item.name}
-                                    href={item.href}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        handleNavClick(item.href);
-                                    }}
-                                    className={`relative text-gray-300 hover:text-indigo-400 transition-colors font-medium group font-mono text-lg ${active ? 'text-indigo-400' : ''
-                                        }`}
-                                >
-                                    {item.name}
-                                    <span
-                                        className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transition-all duration-500 ${active ? 'w-full' : 'w-0 group-hover:w-full'
-                                            }`}
-                                    />
-                                </a>
-                            );
-                        })}
-                    </div>
-
-                    {/* Mobile Menu Button */}
-                    <div className="md:hidden">
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="p-2 rounded-xl bg-slate-900/80 backdrop-blur-xl border border-indigo-500/30 transition-all hover:border-indigo-400/50 shadow-lg"
-                            aria-label="Toggle menu"
+            <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main">
+                <div className="flex justify-between items-center h-16">
+                    {/* Console Header / Brand */}
+                    <div className="flex items-center gap-3">
+                        <Link
+                            href="/"
+                            onClick={() => setIsOpen(false)}
+                            className="group inline-flex items-center gap-2 font-mono text-sm font-bold text-zinc-100 hover:text-[#38BDF8] transition-colors py-2"
                         >
-                            {isOpen ? (
-                                <X className="w-6 h-6 text-indigo-400" />
-                            ) : (
-                                <Menu className="w-6 h-6 text-indigo-400" />
-                            )}
-                        </button>
+                            <span className="w-2 h-2 rounded-sm bg-[#38BDF8] group-hover:rotate-45 transition-transform" />
+                            <span>SHAHID.KHAN</span>
+                        </Link>
+
+                        <div className="hidden sm:flex items-center gap-2 pl-3 border-l border-[#1E2C3F]">
+                            <StatusBadge status="online" prefix="PORTFOLIO:" label="ONLINE" />
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            {/* Mobile Menu */}
-            {isOpen && (
-                <div className="md:hidden bg-slate-950/95 border-t border-indigo-500/20 backdrop-blur-xl shadow-2xl">
-                    <div className="px-4 pt-4 pb-6 space-y-2">
-                        {navItems.map((item) => {
-                            const active = isActive(item.href);
-
+                    {/* Desktop Console Navigation Links */}
+                    <div className="hidden lg:flex items-center gap-1 bg-[#0A111C] p-1 rounded-lg border border-[#1E2C3F]">
+                        {routes.map((item) => {
+                            const active = isRouteActive(item.href);
                             return (
-                                <a
+                                <Link
                                     key={item.name}
                                     href={item.href}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setIsOpen(false);
-                                        handleNavClick(item.href);
-                                    }}
-                                    className={`block px-4 py-3 rounded-xl text-gray-300 hover:bg-slate-900/60 hover:text-indigo-400 transition-all font-medium font-mono text-base ${active ? 'bg-indigo-900/40 text-indigo-400 border-l-4 border-indigo-400' : ''
-                                        }`}
+                                    className={`px-3 py-1.5 rounded-md font-mono text-xs transition-all tracking-wider ${
+                                        active
+                                            ? 'text-cyan-300 bg-[#101A28] border border-[#38BDF8]/40 shadow-[0_0_8px_rgba(56,189,248,0.15)] font-semibold'
+                                            : 'text-zinc-400 hover:text-zinc-100 hover:bg-[#101A28]/50 border border-transparent'
+                                    }`}
                                 >
                                     {item.name}
-                                </a>
+                                </Link>
                             );
                         })}
+                    </div>
+
+                    {/* Console Right Actions */}
+                    <div className="hidden lg:flex items-center gap-2">
+                        <a
+                            href={hero.socials.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-ghost inline-flex items-center gap-1.5 min-h-[36px]"
+                            aria-label="GitHub profile"
+                        >
+                            <Github className="w-3.5 h-3.5" />
+                            <span>GITHUB</span>
+                        </a>
+                        <a
+                            href={hero.resumeDriveLink || hero.resumePath}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-primary inline-flex items-center gap-1.5 min-h-[36px]"
+                        >
+                            <Download className="w-3.5 h-3.5" />
+                            <span>RESUME</span>
+                        </a>
+                    </div>
+
+                    {/* Mobile Menu Toggle Button */}
+                    <button
+                        type="button"
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="lg:hidden w-10 h-10 rounded-lg border border-[#1E2C3F] bg-[#0A111C] text-zinc-300 hover:text-cyan-400 transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-[#38BDF8]/50"
+                        aria-expanded={isOpen}
+                        aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                    >
+                        {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                    </button>
+                </div>
+            </nav>
+
+            {/* Mobile Drawer Menu */}
+            {isOpen && (
+                <div
+                    className="lg:hidden fixed inset-x-0 top-16 bottom-0 bg-[#060B12]/98 backdrop-blur-2xl border-t border-[#1E2C3F] z-40 overflow-y-auto overscroll-contain flex flex-col justify-between"
+                    style={{ maxHeight: 'calc(100dvh - 4rem)' }}
+                >
+                    <div className="px-4 py-6 space-y-2 max-w-md mx-auto w-full">
+                        <div className="pb-3 mb-3 border-b border-[#1E2C3F] flex items-center justify-between">
+                            <span className="font-mono text-[11px] text-zinc-500 uppercase tracking-widest">CONTROL_PLANE_NAV</span>
+                            <StatusBadge status="online" prefix="STATUS:" label="ONLINE" />
+                        </div>
+
+                        <div className="space-y-1">
+                            {routes.map((item) => {
+                                const active = isRouteActive(item.href);
+                                return (
+                                    <Link
+                                        key={item.name}
+                                        href={item.href}
+                                        onClick={() => setIsOpen(false)}
+                                        className={`flex items-center justify-between px-4 py-3.5 rounded-xl font-mono text-xs tracking-wider transition-all min-h-[44px] ${
+                                            active
+                                                ? 'bg-[#101A28] text-cyan-300 border border-[#38BDF8]/40 font-semibold shadow-[0_0_12px_rgba(56,189,248,0.12)]'
+                                                : 'text-zinc-300 hover:bg-[#0A111C] active:bg-[#101A28] border border-transparent'
+                                        }`}
+                                    >
+                                        <span>{item.name}</span>
+                                        {active && (
+                                            <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-pulse" />
+                                        )}
+                                    </Link>
+                                );
+                            })}
+                        </div>
+
+                        <div className="pt-6 flex flex-col gap-2.5 border-t border-[#1E2C3F] mt-4">
+                            <a
+                                href={hero.socials.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-secondary text-center py-3 min-h-[44px] inline-flex items-center justify-center gap-2 text-xs"
+                            >
+                                <Github className="w-4 h-4" />
+                                <span>GITHUB PROFILE</span>
+                            </a>
+                            <a
+                                href={hero.resumeDriveLink || hero.resumePath}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-primary text-center py-3 min-h-[44px] inline-flex items-center justify-center gap-2 text-xs"
+                            >
+                                <Download className="w-4 h-4" />
+                                <span>DOWNLOAD RESUME (PDF)</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div className="p-4 border-t border-[#1E2C3F]/40 text-center font-mono text-[10px] text-zinc-600">
+                        <span>SHAHID.KHAN // CLOUD CONTROL PLANE</span>
                     </div>
                 </div>
             )}
-        </nav>
+        </header>
     );
 }

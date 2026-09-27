@@ -1,70 +1,109 @@
 'use client';
 
-import { about } from '@/lib/siteContent';
+import { useMemo, useState } from 'react';
+import { devOpsStack, skillCategories } from '@/lib/siteContent';
+import SectionHeader from './SectionHeader';
 import Reveal from './Reveal';
-import { motion } from 'framer-motion';
-import { Terminal } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export default function Skills() {
-    const allSkills = about.skills.flatMap((category) =>
-        category.items.map((item) => ({
-            ...item,
-            category: category.category,
-        }))
-    );
+    const [activeCategory, setActiveCategory] = useState<string>('All');
+    const [hovered, setHovered] = useState<string | null>(null);
+
+    const filtered = useMemo(() => {
+        if (activeCategory === 'All') return devOpsStack;
+        return devOpsStack.filter((s) => s.category === activeCategory);
+    }, [activeCategory]);
+
+    const activeSkill = devOpsStack.find((s) => s.name === hovered);
 
     return (
-        <section id="skills" className="min-h-screen flex items-center justify-center py-16 section-cloud">
-            <div className="section-grid opacity-5" />
-            <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/10 via-transparent to-purple-950/10" />
+        <section id="skills" className="relative py-20 md:py-28 bg-[#050608]">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <SectionHeader
+                    number="02 / SKILLS"
+                    title="DevOps Stack"
+                    subtitle="Interactive map of tools I use — hover a technology for context."
+                />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <Reveal>
-                    <div className="text-center mb-12">
-                        <div className="terminal-badge mb-4">
-                            <Terminal className="w-5 h-5 text-indigo-400" />
-                            <span className="text-indigo-400 font-mono text-sm font-medium">$ docker ps --filter &quot;label=skills&quot;</span>
-                        </div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-gray-100 mb-4">
-                            Technical Skills
-                        </h2>
-                        <div className="w-20 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mx-auto rounded-full" />
-                        <p className="mt-4 text-lg text-gray-400 max-w-3xl mx-auto font-light">
-                            Technologies and tools I use to build scalable, secure cloud infrastructure
-                        </p>
+                <Reveal delay={0.05}>
+                    <div className="flex flex-wrap gap-2 mb-10 justify-center">
+                        {skillCategories.map((cat) => (
+                            <button
+                                key={cat}
+                                type="button"
+                                onClick={() => setActiveCategory(cat)}
+                                className={`px-3 py-1.5 rounded-lg font-mono text-xs border transition-colors ${
+                                    activeCategory === cat
+                                        ? 'border-cyan-500/50 bg-cyan-500/10 text-cyan-300'
+                                        : 'border-zinc-800 text-zinc-500 hover:border-zinc-600 hover:text-zinc-300'
+                                }`}
+                            >
+                                {cat}
+                            </button>
+                        ))}
                     </div>
                 </Reveal>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                    {allSkills.map((skill, index) => (
-                        <Reveal key={`${skill.name}-${index}`} delay={0.05 + index * 0.02}>
-                            <motion.div
-                                whileHover={{ y: -8, scale: 1.05 }}
-                                className="glass-card flex flex-col items-center gap-3 p-6 cursor-default group"
-                            >
-                                {skill.iconUrl && (
-                                    <div className="w-16 h-16 flex items-center justify-center">
-                                        <img
-                                            src={skill.iconUrl}
-                                            alt={skill.name}
-                                            className="w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-500 filter grayscale group-hover:grayscale-0"
-                                            loading="lazy"
-                                            onError={(e) => {
-                                                e.currentTarget.style.display = 'none';
-                                            }}
-                                        />
-                                    </div>
-                                )}
-                                <span className="text-xs font-mono text-indigo-400 text-center group-hover:text-indigo-300 transition-colors font-semibold">
-                                    {skill.name}
-                                </span>
-                                <span className="text-[10px] text-gray-600 font-mono text-center leading-tight">
-                                    {skill.category}
-                                </span>
-                            </motion.div>
-                        </Reveal>
-                    ))}
+                <div className="grid lg:grid-cols-[1fr_280px] gap-8 items-start">
+                    <motion.div
+                        layout
+                        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3"
+                    >
+                        <AnimatePresence mode="popLayout">
+                            {filtered.map((skill) => (
+                                <motion.button
+                                    key={skill.name}
+                                    type="button"
+                                    layout
+                                    initial={{ opacity: 0, scale: 0.96 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.96 }}
+                                    transition={{ duration: 0.2 }}
+                                    onMouseEnter={() => setHovered(skill.name)}
+                                    onFocus={() => setHovered(skill.name)}
+                                    onMouseLeave={() => setHovered(null)}
+                                    onBlur={() => setHovered(null)}
+                                    className={`text-left p-4 rounded-xl border transition-all duration-200 ${
+                                        hovered === skill.name
+                                            ? 'border-cyan-500/40 bg-cyan-500/5 -translate-y-0.5'
+                                            : 'border-zinc-800/80 bg-zinc-900/30 hover:border-zinc-700'
+                                    }`}
+                                >
+                                    <p className="font-medium text-zinc-100 text-sm">{skill.name}</p>
+                                    <p className="font-mono text-[10px] text-zinc-600 mt-1 truncate">
+                                        {skill.category}
+                                    </p>
+                                </motion.button>
+                            ))}
+                        </AnimatePresence>
+                    </motion.div>
+
+                    <Reveal delay={0.1} className="hidden lg:block sticky top-24">
+                        <div className="panel-glass rounded-xl p-5 border border-zinc-800/80 min-h-[140px]">
+                            {activeSkill ? (
+                                <>
+                                    <p className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest">
+                                        Tooltip
+                                    </p>
+                                    <p className="text-lg font-medium text-zinc-100 mt-2">{activeSkill.name}</p>
+                                    <p className="font-mono text-xs text-cyan-400/80 mt-1">{activeSkill.category}</p>
+                                    <p className="text-sm text-zinc-400 mt-3 leading-relaxed">{activeSkill.usage}</p>
+                                </>
+                            ) : (
+                                <p className="text-sm text-zinc-500">Hover a technology to see how I use it.</p>
+                            )}
+                        </div>
+                    </Reveal>
                 </div>
+
+                {activeSkill && (
+                    <div className="lg:hidden mt-6 panel-glass rounded-xl p-4 border border-zinc-800/80">
+                        <p className="font-medium text-zinc-100">{activeSkill.name}</p>
+                        <p className="font-mono text-xs text-cyan-400/80">{activeSkill.category}</p>
+                        <p className="text-sm text-zinc-400 mt-2">{activeSkill.usage}</p>
+                    </div>
+                )}
             </div>
         </section>
     );
